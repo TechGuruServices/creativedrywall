@@ -12,12 +12,12 @@ const QuoteCalculator = () => {
     const [complexity, setComplexity] = useState('standard');
     const [estimate, setEstimate] = useState(null);
 
-    // Base rates per square foot
+    // Base rates per square foot - Updated for Missoula, MT market (2024-2025)
     const baseRates = {
-        'new-construction': 1.50,
-        'repair': 2.00,
-        'texture': 1.25,
-        'finishing': 1.75,
+        'new-construction': 1.75,  // Market range: $1.50-$2.20, avg $1.62
+        'repair': 2.50,             // Market range: $3-$8/sq ft for repairs
+        'texture': 1.25,            // Competitive texture rate
+        'finishing': 2.00,          // Market range: $1.70-$3.50 depending on level
     };
 
     // Complexity multipliers

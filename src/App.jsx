@@ -367,7 +367,7 @@ const App = () => {
             </motion.nav>
 
             {/* Premium Hero Section */}
-            <section id="home" className="pt-32 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
+            <section id="home" className="pt-40 md:pt-48 lg:pt-56 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
                 {/* Hero Background with Video */}
                 <div className="absolute inset-0">
                     {/* Video Background */}
@@ -446,23 +446,6 @@ const App = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        {/* Premium Badge with Gold Accent */}
-                        <motion.div
-                            className="inline-block"
-                            initial={{ scale: 0, rotate: -10 }}
-                            animate={{ scale: 1, rotate: 0 }}
-                            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                        >
-                            <motion.div
-                                className="premium-badge mb-8"
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                            >
-                                <Award className="w-5 h-5" />
-                                <span>Family Owned & Operated Since 1976</span>
-                                <Sparkles className="w-4 h-4 opacity-60" />
-                            </motion.div>
-                        </motion.div>
 
                         {/* Main Heading with Enhanced Animation */}
                         <motion.h1
