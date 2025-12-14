@@ -194,10 +194,12 @@
             }
         }
 
-        /* Prevent text size adjustment */
+        /* Prevent text size adjustment - include both for cross-browser support */
         html {
             -webkit-text-size-adjust: 100%;
+            /* Safari/iOS */
             text-size-adjust: 100%;
+            /* Standard property */
         }
     }
 
