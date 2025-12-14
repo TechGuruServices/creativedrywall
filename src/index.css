@@ -869,3 +869,218 @@ body.light .premium-badge {
     border-radius: 50%;
     box-shadow: 0 0 20px var(--accent-cyan);
 }
+
+/* ========================================
+   PREMIUM TIDIO CHAT CUSTOMIZATION
+   ======================================== */
+
+/* Chat Button - Premium Glassmorphism with Gradient */
+#tidio-chat-code iframe#tidio-chat-iframe {
+    /* Position adjustments for better mobile/desktop placement */
+    bottom: 20px !important;
+    right: 20px !important;
+}
+
+/* Override Tidio button with premium styling */
+#tidio-chat-button {
+    background: linear-gradient(135deg,
+            rgba(34, 211, 238, 0.9) 0%,
+            rgba(59, 130, 246, 0.9) 100%) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    backdrop-filter: blur(20px) !important;
+    border-radius: 24px !important;
+    box-shadow:
+        0 8px 32px -8px rgba(34, 211, 238, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+        0 0 60px -20px rgba(34, 211, 238, 0.6) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 16px 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#tidio-chat-button:hover {
+    transform: translateY(-4px) scale(1.05) !important;
+    box-shadow:
+        0 16px 48px -12px rgba(34, 211, 238, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+        0 0 80px -20px rgba(34, 211, 238, 0.8) !important;
+    background: linear-gradient(135deg,
+            rgba(34, 211, 238, 1) 0%,
+            rgba(59, 130, 246, 1) 100%) !important;
+}
+
+/* Pulse animation for chat button */
+@keyframes tidio-pulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 32px -8px rgba(34, 211, 238, 0.4),
+            0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+            0 0 60px -20px rgba(34, 211, 238, 0.6);
+    }
+
+    50% {
+        box-shadow:
+            0 8px 32px -8px rgba(34, 211, 238, 0.6),
+            0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+            0 0 80px -20px rgba(34, 211, 238, 0.8);
+    }
+}
+
+#tidio-chat-button {
+    animation: tidio-pulse 3s ease-in-out infinite !important;
+}
+
+/* Chat Window - Premium Glass Effect */
+#tidio-chat {
+    border-radius: 24px !important;
+    overflow: hidden !important;
+    box-shadow:
+        0 20px 60px -15px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 0 100px -30px rgba(34, 211, 238, 0.3) !important;
+}
+
+/* Chat Header - Gradient */
+.tidio-chat-header,
+#tidio-chat-header {
+    background: linear-gradient(135deg,
+            rgba(34, 211, 238, 0.95) 0%,
+            rgba(59, 130, 246, 0.95) 100%) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    backdrop-filter: blur(20px) !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.1) inset !important;
+}
+
+/* Chat Body - Dark glassmorphism */
+.tidio-chat-body,
+#tidio-chat-body,
+.tidio-chat-messages {
+    background: rgba(15, 23, 42, 0.95) !important;
+    -webkit-backdrop-filter: blur(40px) !important;
+    backdrop-filter: blur(40px) !important;
+}
+
+/* User Messages - Cyan gradient */
+.tidio-message-user,
+.tidio-chat-message-user,
+[class*="user-message"] {
+    background: linear-gradient(135deg,
+            rgba(34, 211, 238, 0.2) 0%,
+            rgba(59, 130, 246, 0.2) 100%) !important;
+    border: 1px solid rgba(34, 211, 238, 0.3) !important;
+    border-radius: 16px !important;
+    color: #ffffff !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 4px 12px -4px rgba(34, 211, 238, 0.2) !important;
+}
+
+/* Agent Messages - Subtle glass */
+.tidio-message-agent,
+.tidio-chat-message-agent,
+[class*="agent-message"] {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 16px !important;
+    color: #ffffff !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Input Field - Premium styling */
+.tidio-chat-input,
+#tidio-chat-input,
+.tidio-chat-input-field {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 16px !important;
+    color: #ffffff !important;
+    padding: 12px 16px !important;
+    transition: all 0.3s ease !important;
+}
+
+.tidio-chat-input:focus,
+#tidio-chat-input:focus {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(34, 211, 238, 0.5) !important;
+    box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.15) !important;
+    outline: none !important;
+}
+
+/* Send Button - Gradient */
+.tidio-chat-send-button,
+#tidio-chat-send-button,
+[class*="send-button"] {
+    background: linear-gradient(135deg,
+            #22d3ee 0%,
+            #3b82f6 100%) !important;
+    border-radius: 12px !important;
+    border: none !important;
+    color: #ffffff !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px -4px rgba(34, 211, 238, 0.4) !important;
+}
+
+.tidio-chat-send-button:hover,
+#tidio-chat-send-button:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 8px 20px -8px rgba(34, 211, 238, 0.6) !important;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    #tidio-chat-code iframe#tidio-chat-iframe {
+        bottom: 16px !important;
+        right: 16px !important;
+    }
+
+    #tidio-chat {
+        border-radius: 20px !important;
+        max-width: calc(100vw - 32px) !important;
+    }
+
+    #tidio-chat-button {
+        padding: 14px 18px !important;
+        border-radius: 20px !important;
+    }
+}
+
+/* Reduce animations on mobile for performance */
+@media (max-width: 768px) {
+    #tidio-chat-button {
+        animation: none !important;
+    }
+}
+
+/* Light mode adjustments for Tidio */
+body.light #tidio-chat-button {
+    background: linear-gradient(135deg,
+            rgba(8, 145, 178, 0.95) 0%,
+            rgba(37, 99, 235, 0.95) 100%) !important;
+    box-shadow:
+        0 8px 32px -8px rgba(8, 145, 178, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.3) inset !important;
+}
+
+body.light .tidio-chat-body,
+body.light #tidio-chat-body {
+    background: rgba(255, 255, 255, 0.98) !important;
+}
+
+body.light .tidio-message-agent,
+body.light [class*="agent-message"] {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    color: #09090b !important;
+}
+
+body.light .tidio-chat-input,
+body.light #tidio-chat-input {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    color: #09090b !important;
+}
