@@ -678,20 +678,6 @@ const App = () => {
                                 transition={{ duration: 0.8, delay: index * 0.15 }}
                                 whileHover={{ y: -12, scale: 1.02 }}
                             >
-                                {/* Featured badge for first service */}
-                                {service.featured && (
-                                    <motion.div
-                                        className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 rounded-full border border-amber-400/30"
-                                        initial={{ opacity: 0, x: 20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: 0.5 }}
-                                    >
-                                        <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider flex items-center gap-1">
-                                            <Star className="w-3 h-3" /> Most Popular
-                                        </span>
-                                    </motion.div>
-                                )}
 
                                 {/* Glow effect on hover */}
                                 <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl ${service.accent === 'cyan' ? 'bg-gradient-to-br from-cyan-500/5 to-transparent' :
@@ -732,16 +718,46 @@ const App = () => {
                                     />
                                 </div>
 
-                                {/* Get a Quote button */}
-                                <motion.a
-                                    href="#contact"
-                                    className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 text-cyan-400 hover:from-cyan-500/20 hover:to-blue-500/20 hover:border-cyan-400/50 hover:text-cyan-300 transition-all duration-300 cursor-pointer"
-                                    whileHover={{ scale: 1.05, x: 5 }}
+                                {/* Get a Quote button - Premium animated CTA */}
+                                <motion.button
+                                    onClick={() => {
+                                        document.getElementById('contact')?.scrollIntoView({ 
+                                            behavior: 'smooth',
+                                            block: 'start'
+                                        });
+                                    }}
+                                    className="group/btn relative inline-flex items-center gap-2 mt-6 px-6 py-3 rounded-xl text-sm font-semibold overflow-hidden cursor-pointer"
+                                    whileHover={{ scale: 1.08, y: -3 }}
                                     whileTap={{ scale: 0.95 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.4 + index * 0.1, type: "spring", stiffness: 300 }}
                                 >
-                                    <span>Get a Quote</span>
-                                    <ChevronRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                                </motion.a>
+                                    {/* Gradient background */}
+                                    <span className={`absolute inset-0 bg-gradient-to-r ${service.accent === 'cyan' ? 'from-cyan-500/20 to-blue-500/20' : service.accent === 'blue' ? 'from-blue-500/20 to-indigo-500/20' : 'from-amber-500/20 to-orange-500/20'}`} />
+                                    
+                                    {/* Border with glow */}
+                                    <span className={`absolute inset-0 rounded-xl border ${service.accent === 'cyan' ? 'border-cyan-500/40 group-hover/btn:border-cyan-400/70 group-hover/btn:shadow-[0_0_20px_rgba(34,211,238,0.3)]' : service.accent === 'blue' ? 'border-blue-500/40 group-hover/btn:border-blue-400/70 group-hover/btn:shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'border-amber-500/40 group-hover/btn:border-amber-400/70 group-hover/btn:shadow-[0_0_20px_rgba(245,158,11,0.3)]'} transition-all duration-500`} />
+                                    
+                                    {/* Shimmer effect on hover */}
+                                    <motion.span
+                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"
+                                    />
+                                    
+                                    {/* Text content */}
+                                    <span className={`relative z-10 flex items-center gap-2 ${service.accent === 'cyan' ? 'text-cyan-400 group-hover/btn:text-cyan-300' : service.accent === 'blue' ? 'text-blue-400 group-hover/btn:text-blue-300' : 'text-amber-400 group-hover/btn:text-amber-300'} transition-colors duration-300`}>
+                                        <Star className="w-4 h-4" />
+                                        <span>Get a Quote</span>
+                                        <motion.span
+                                            className="inline-block"
+                                            animate={{ x: [0, 4, 0] }}
+                                            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                                        >
+                                            <ChevronRight className="w-4 h-4" />
+                                        </motion.span>
+                                    </span>
+                                </motion.button>
                             </motion.div>
                         ))}
                     </div>
