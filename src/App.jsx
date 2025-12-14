@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Phone, MapPin, ShieldCheck, Hammer, Users, Star, Calendar, CheckCircle, Clock, Mail, Menu, X, Home, Briefcase, User, Image, MessageCircle, Sun, Moon, Calculator } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, MapPin, ShieldCheck, Hammer, Users, Star, Calendar, CheckCircle, Clock, Mail, Menu, X, Home, Briefcase, User, Image, MessageCircle, Sun, Moon, Calculator, ArrowDown, Award, Sparkles, ChevronRight, Play, Zap } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import QuoteCalculator from './components/QuoteCalculator';
 
 const App = () => {
@@ -72,17 +72,23 @@ const App = () => {
         {
             icon: <Hammer className="w-8 h-8" />,
             title: "Complete Drywall Installation",
-            description: "Full-service drywall installation from framing to final finish for residential and commercial properties."
+            description: "Full-service drywall installation from framing to final finish for residential and commercial properties.",
+            featured: true,
+            accent: "cyan"
         },
         {
             icon: <ShieldCheck className="w-8 h-8" />,
             title: "Repair & Restoration",
-            description: "Expert repair of damaged drywall, water damage, and structural issues with lasting solutions."
+            description: "Expert repair of damaged drywall, water damage, and structural issues with lasting solutions.",
+            featured: false,
+            accent: "blue"
         },
         {
             icon: <Users className="w-8 h-8" />,
             title: "All Phase Service",
-            description: "Comprehensive drywall services including hanging, taping, texturing, and finishing for any project size."
+            description: "Comprehensive drywall services including hanging, taping, texturing, and finishing for any project size.",
+            featured: false,
+            accent: "gold"
         }
     ];
 
@@ -339,8 +345,8 @@ const App = () => {
                 </div>
             </motion.nav>
 
-            {/* Hero Section with Rotating Images */}
-            <section id="home" className="pt-40 pb-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+            {/* Premium Hero Section */}
+            <section id="home" className="pt-32 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
                 {/* Hero Background with Video */}
                 <div className="absolute inset-0">
                     {/* Video Background */}
@@ -354,74 +360,148 @@ const App = () => {
                     >
                         <source src={heroVideoUrl} type="video/mp4" />
                     </video>
-                    {/* Overlay */}
+                    {/* Premium Overlay */}
                     <div className="absolute inset-0 hero-overlay"></div>
+
+                    {/* Floating Particles */}
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                        {[...Array(12)].map((_, i) => (
+                            <motion.div
+                                key={i}
+                                className="absolute w-2 h-2 rounded-full"
+                                style={{
+                                    background: i % 3 === 0 ? 'rgba(34, 211, 238, 0.6)' : i % 3 === 1 ? 'rgba(59, 130, 246, 0.6)' : 'rgba(212, 175, 55, 0.5)',
+                                    left: `${10 + (i * 8) % 80}%`,
+                                    top: `${15 + (i * 7) % 70}%`,
+                                    filter: 'blur(1px)',
+                                }}
+                                animate={{
+                                    y: [0, -30, 0],
+                                    x: [0, i % 2 === 0 ? 15 : -15, 0],
+                                    opacity: [0.3, 0.7, 0.3],
+                                    scale: [1, 1.2, 1],
+                                }}
+                                transition={{
+                                    duration: 4 + i * 0.5,
+                                    repeat: Infinity,
+                                    delay: i * 0.3,
+                                    ease: "easeInOut",
+                                }}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Gradient Mesh Orbs */}
+                    <motion.div
+                        className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            x: [0, 50, 0],
+                        }}
+                        transition={{
+                            duration: 8,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                        }}
+                    />
+                    <motion.div
+                        className="absolute bottom-1/4 -right-32 w-80 h-80 bg-gradient-to-l from-blue-500/15 to-cyan-500/15 rounded-full blur-3xl"
+                        animate={{
+                            scale: [1.2, 1, 1.2],
+                            x: [0, -30, 0],
+                        }}
+                        transition={{
+                            duration: 10,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                        }}
+                    />
                 </div>
 
-                <div className="max-w-7xl mx-auto relative z-10">
+                <div className="max-w-7xl mx-auto relative z-10 w-full">
                     <motion.div
-                        className="text-center max-w-4xl mx-auto"
+                        className="text-center max-w-5xl mx-auto"
                         initial={{ opacity: 0, y: 60 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
+                        {/* Premium Badge with Gold Accent */}
                         <motion.div
                             className="inline-block"
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
+                            initial={{ scale: 0, rotate: -10 }}
+                            animate={{ scale: 1, rotate: 0 }}
                             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                         >
-                            <motion.span
-                                className="inline-flex items-center px-8 py-3 mb-8 rounded-full text-white/90 text-lg font-medium tracking-wide backdrop-blur-2xl"
-                                whileHover={{ scale: 1.03 }}
+                            <motion.div
+                                className="premium-badge mb-8"
+                                whileHover={{ scale: 1.05, y: -2 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                                style={{
-                                    background: 'rgba(255, 255, 255, 0.08)',
-                                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(255, 255, 255, 0.05)',
-                                }}
                             >
-                                Family Owned & Operated Since 1976
-                            </motion.span>
+                                <Award className="w-5 h-5" />
+                                <span>Family Owned & Operated Since 1976</span>
+                                <Sparkles className="w-4 h-4 opacity-60" />
+                            </motion.div>
                         </motion.div>
 
+                        {/* Main Heading with Enhanced Animation */}
                         <motion.h1
                             className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight"
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
                         >
-                            <span className="block mb-4">Montana's Premier</span>
                             <motion.span
-                                className="block pb-2 bg-gradient-to-r from-blue-300 via-cyan-200 to-blue-400 bg-clip-text text-transparent"
-                                animate={{
-                                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                                }}
-                                transition={{
-                                    duration: 4,
-                                    repeat: Infinity,
-                                    ease: "linear"
-                                }}
-                                style={{
-                                    backgroundImage: 'linear-gradient(90deg, #60a5fa, #22d3ee, #60a5fa)',
-                                    backgroundSize: '200% 200%',
-                                }}
+                                className="block mb-4"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.4 }}
+                            >
+                                Montana's Premier
+                            </motion.span>
+                            <motion.span
+                                className="block pb-2 gradient-text-animated"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5 }}
                             >
                                 Drywall Experts
                             </motion.span>
                         </motion.h1>
 
-                        <motion.p
-                            className="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed"
+                        {/* Subheading with Service Types */}
+                        <motion.div
+                            className="mb-12"
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
                         >
-                            <span className="text-cyan-300 font-bold text-2xl block mb-4">ALL PHASE DRYWALL SERVICE • RESIDENTIAL & COMMERCIAL</span>
-                            Four generations of family craftsmanship serving Missoula and the surrounding valleys with
-                            precision drywall installation, repair, and finishing services.
-                        </motion.p>
+                            <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+                                {['ALL PHASE DRYWALL', 'RESIDENTIAL', 'COMMERCIAL'].map((item, i) => (
+                                    <motion.span
+                                        key={item}
+                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold tracking-wide"
+                                        style={{
+                                            background: 'rgba(34, 211, 238, 0.1)',
+                                            border: '1px solid rgba(34, 211, 238, 0.3)',
+                                            color: 'rgba(34, 211, 238, 1)',
+                                        }}
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.6 + i * 0.1 }}
+                                        whileHover={{ scale: 1.05 }}
+                                    >
+                                        <Zap className="w-3 h-3" />
+                                        {item}
+                                    </motion.span>
+                                ))}
+                            </div>
+                            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                                Four generations of family craftsmanship serving Missoula and the surrounding valleys with
+                                precision drywall installation, repair, and finishing services.
+                            </p>
+                        </motion.div>
 
+                        {/* CTA Buttons */}
                         <motion.div
                             className="flex flex-col sm:flex-row gap-6 justify-center"
                             initial={{ opacity: 0, y: 40 }}
@@ -430,48 +510,55 @@ const App = () => {
                         >
                             <motion.a
                                 href="#contact"
-                                className="glass-button bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold py-5 px-10 rounded-2xl text-lg transition-all duration-300 transform relative overflow-hidden"
+                                className="group relative glass-button bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold py-5 px-10 rounded-2xl text-lg overflow-hidden"
                                 whileHover={{ scale: 1.05, y: -5 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-blue-700/30 to-cyan-600/30 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-                                <span className="flex items-center justify-center space-x-3 relative z-10">
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                />
+                                <span className="flex items-center justify-center gap-3 relative z-10">
                                     <Star className="w-6 h-6" />
                                     <span className="font-semibold">Get Your Free Quote</span>
+                                    <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </span>
                             </motion.a>
 
                             <motion.a
                                 href="tel:+14062390850"
-                                className="glass-button border border-gray-600/50 hover:border-cyan-500/50 text-gray-200 hover:text-cyan-300 font-medium py-5 px-10 rounded-2xl text-lg transition-all duration-300 relative overflow-hidden flex items-center justify-center"
+                                className="group glass-button border border-white/20 hover:border-cyan-400/50 text-white font-medium py-5 px-10 rounded-2xl text-lg flex items-center justify-center"
                                 whileHover={{ scale: 1.05, y: -5 }}
                                 whileTap={{ scale: 0.95 }}
                             >
-                                <div className="absolute inset-0 bg-gray-800/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
-                                <span className="flex items-center justify-center space-x-3 relative z-10">
-                                    <Phone className="w-6 h-6" />
+                                <span className="flex items-center justify-center gap-3 relative z-10">
+                                    <motion.div
+                                        animate={{ rotate: [0, 15, -15, 0] }}
+                                        transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
+                                    >
+                                        <Phone className="w-6 h-6 text-cyan-400" />
+                                    </motion.div>
                                     <span className="font-semibold">(406) 239-0850</span>
                                 </span>
                             </motion.a>
                         </motion.div>
 
-                        {/* Floating Badges */}
+                        {/* Trust Badges */}
                         <motion.div
-                            className="flex flex-wrap justify-center gap-4 mt-12"
+                            className="flex flex-wrap justify-center gap-4 mt-16"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.9, duration: 0.5 }}
                         >
                             {[
+                                { icon: <Award className="w-5 h-5" />, text: "Licensed & Insured" },
                                 { icon: <Users className="w-5 h-5" />, text: "Family Team" },
                                 { icon: <MapPin className="w-5 h-5" />, text: "Local Experts" },
-                                { icon: <ShieldCheck className="w-5 h-5" />, text: "Guaranteed" },
-                                { icon: <Clock className="w-5 h-5" />, text: "49+ Years" }
+                                { icon: <ShieldCheck className="w-5 h-5" />, text: "Satisfaction Guaranteed" }
                             ].map((badge, index) => (
                                 <motion.div
                                     key={index}
-                                    className="flex items-center space-x-2 px-4 py-2 bg-gray-800/40 backdrop-blur-sm rounded-full border border-gray-700/50 hover:border-cyan-500/30 transition-all duration-300"
-                                    whileHover={{ y: -3, borderColor: 'rgba(59, 130, 246, 0.5)' }}
+                                    className="flex items-center gap-2 px-5 py-3 bg-white/5 backdrop-blur-md rounded-full border border-white/10 hover:border-cyan-400/30 transition-all duration-300"
+                                    whileHover={{ y: -3, scale: 1.02 }}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 1 + index * 0.1, duration: 0.5 }}
@@ -483,7 +570,7 @@ const App = () => {
                         </motion.div>
                     </motion.div>
 
-                    {/* Stats */}
+                    {/* Stats Section */}
                     <motion.div
                         className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 max-w-4xl mx-auto"
                         initial={{ opacity: 0, y: 50 }}
@@ -498,30 +585,59 @@ const App = () => {
                         ].map((stat, index) => (
                             <motion.div
                                 key={stat.label}
-                                className="text-center p-6 bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-700/40 hover:border-cyan-500/30 transition-all duration-300"
-                                whileHover={{ y: -5, scale: 1.02 }}
+                                className="glass-card text-center p-6 rounded-2xl"
+                                whileHover={{ y: -8, scale: 1.02 }}
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.2 + index * 0.1, duration: 0.6 }}
                             >
                                 <div className="mb-4 flex justify-center">
-                                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center text-cyan-400">
+                                    <div className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl flex items-center justify-center text-cyan-400 border border-cyan-500/20">
                                         {stat.icon}
                                     </div>
                                 </div>
-                                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent mb-2">
+                                <motion.div
+                                    className="text-3xl md:text-4xl font-bold gradient-text-animated mb-2"
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    transition={{ delay: 1.4 + index * 0.1, type: "spring" }}
+                                >
                                     {stat.number}
-                                </div>
-                                <div className="text-gray-300 text-sm font-medium">{stat.label}</div>
+                                </motion.div>
+                                <div className="text-gray-400 text-sm font-medium">{stat.label}</div>
                             </motion.div>
                         ))}
                     </motion.div>
                 </div>
+
+                {/* Scroll Indicator */}
+                <motion.div
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.5 }}
+                >
+                    <motion.a
+                        href="#services"
+                        className="flex flex-col items-center gap-2 text-gray-400 hover:text-cyan-400 transition-colors"
+                        animate={{ y: [0, 8, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                        <span className="text-xs uppercase tracking-widest font-medium">Scroll to Explore</span>
+                        <ArrowDown className="w-5 h-5" />
+                    </motion.a>
+                </motion.div>
             </section>
 
-            {/* Services Section */}
-            <section id="services" className="py-28 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+            {/* Premium Services Section */}
+            <section id="services" className="py-32 px-4 sm:px-6 lg:px-8 relative">
+                {/* Section background decoration */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-l from-blue-500/5 to-cyan-500/5 rounded-full blur-3xl" />
+                </div>
+
+                <div className="max-w-7xl mx-auto relative">
                     <motion.div
                         className="text-center mb-20"
                         initial={{ opacity: 0, y: 50 }}
@@ -529,65 +645,125 @@ const App = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <motion.span
-                            className="inline-block px-6 py-2 mb-6 bg-gradient-to-r from-blue-900/40 to-cyan-900/40 rounded-full text-cyan-300 text-lg font-medium border border-cyan-500/30"
+                        <motion.div
+                            className="premium-badge mx-auto mb-8"
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
                             whileHover={{ scale: 1.05 }}
                         >
-                            Our Premium Services
-                        </motion.span>
+                            <Sparkles className="w-4 h-4" />
+                            <span>Our Premium Services</span>
+                        </motion.div>
                         <h2 className="text-4xl md:text-6xl font-bold mb-8">
-                            <span className="block">Complete Drywall</span>
-                            <motion.span
-                                className="block bg-gradient-to-r from-blue-300 via-cyan-200 to-blue-400 bg-clip-text text-transparent"
-                                initial={{ backgroundPosition: "0% 50%" }}
-                                whileInView={{ backgroundPosition: "100% 50%" }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 3, ease: "easeInOut" }}
-                                style={{
-                                    backgroundImage: 'linear-gradient(90deg, #60a5fa, #22d3ee, #60a5fa)',
-                                    backgroundSize: '200% 200%',
-                                }}
-                            >
+                            <span className="block mb-2">Complete Drywall</span>
+                            <span className="block gradient-text-animated">
                                 Solutions for Every Project
-                            </motion.span>
+                            </span>
                         </h2>
-                        <p className="text-xl text-gray-300 max-w-4xl mx-auto">
+                        <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
                             From initial consultation to final inspection, we provide comprehensive drywall solutions
-                            with unmatched attention to detail and quality craftsmanship passed down through generations.
+                            with unmatched attention to detail and quality craftsmanship.
                         </p>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-3 gap-10">
+                    <div className="grid md:grid-cols-3 gap-8">
                         {services.map((service, index) => (
                             <motion.div
                                 key={service.title}
-                                className="glass-card p-10 rounded-3xl border border-gray-700/30 hover:border-cyan-500/40 transition-all duration-500"
+                                className="group relative glass-card p-10 rounded-3xl overflow-hidden"
                                 initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.8, delay: index * 0.2 }}
-                                whileHover={{ y: -10, scale: 1.02 }}
+                                transition={{ duration: 0.8, delay: index * 0.15 }}
+                                whileHover={{ y: -12, scale: 1.02 }}
                             >
-                                <div className="w-16 h-16 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-2xl flex items-center justify-center text-cyan-400 mb-8 border border-cyan-500/20">
-                                    {service.icon}
-                                </div>
-                                <h3 className="text-2xl font-bold mb-6 text-white">{service.title}</h3>
-                                <p className="text-gray-300 mb-8 leading-relaxed text-lg">{service.description}</p>
-                                <motion.div
-                                    className="w-full h-1 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full overflow-hidden"
-                                    whileHover={{ width: '100%' }}
-                                >
+                                {/* Featured badge for first service */}
+                                {service.featured && (
                                     <motion.div
-                                        className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"
+                                        className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 rounded-full border border-amber-400/30"
+                                        initial={{ opacity: 0, x: 20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.5 }}
+                                    >
+                                        <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider flex items-center gap-1">
+                                            <Star className="w-3 h-3" /> Most Popular
+                                        </span>
+                                    </motion.div>
+                                )}
+
+                                {/* Glow effect on hover */}
+                                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl ${service.accent === 'cyan' ? 'bg-gradient-to-br from-cyan-500/5 to-transparent' :
+                                    service.accent === 'blue' ? 'bg-gradient-to-br from-blue-500/5 to-transparent' :
+                                        'bg-gradient-to-br from-amber-500/5 to-transparent'
+                                    }`} />
+
+                                {/* Icon with accent color */}
+                                <motion.div
+                                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 border ${service.accent === 'cyan' ? 'bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 border-cyan-500/30 text-cyan-400' :
+                                        service.accent === 'blue' ? 'bg-gradient-to-br from-blue-500/20 to-blue-600/10 border-blue-500/30 text-blue-400' :
+                                            'bg-gradient-to-br from-amber-500/20 to-amber-600/10 border-amber-500/30 text-amber-400'
+                                        }`}
+                                    whileHover={{ scale: 1.1, rotate: 5 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    {service.icon}
+                                </motion.div>
+
+                                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-cyan-300 transition-colors">
+                                    {service.title}
+                                </h3>
+                                <p className="text-gray-400 mb-8 leading-relaxed text-lg">
+                                    {service.description}
+                                </p>
+
+                                {/* Animated progress bar */}
+                                <div className="relative h-1 bg-white/5 rounded-full overflow-hidden">
+                                    <motion.div
+                                        className={`absolute inset-y-0 left-0 rounded-full ${service.accent === 'cyan' ? 'bg-gradient-to-r from-cyan-500 to-cyan-400' :
+                                            service.accent === 'blue' ? 'bg-gradient-to-r from-blue-500 to-blue-400' :
+                                                'bg-gradient-to-r from-amber-500 to-amber-400'
+                                            }`}
                                         initial={{ width: '0%' }}
                                         whileInView={{ width: '100%' }}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 1.5, delay: 0.5 }}
+                                        transition={{ duration: 1.5, delay: 0.3 + index * 0.2 }}
                                     />
-                                </motion.div>
+                                </div>
+
+                                {/* Learn more link */}
+                                <motion.a
+                                    href="#contact"
+                                    className="inline-flex items-center gap-2 mt-6 text-sm font-medium text-gray-400 hover:text-cyan-400 transition-colors group/link"
+                                    whileHover={{ x: 5 }}
+                                >
+                                    <span>Get a Quote</span>
+                                    <ChevronRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                                </motion.a>
                             </motion.div>
                         ))}
                     </div>
+
+                    {/* Additional services CTA */}
+                    <motion.div
+                        className="text-center mt-16"
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5 }}
+                    >
+                        <p className="text-gray-400 mb-6">Need something specific? We handle custom projects too.</p>
+                        <motion.a
+                            href="#contact"
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:border-cyan-400/30 text-white hover:text-cyan-400 transition-all"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <MessageCircle className="w-4 h-4" />
+                            <span className="font-medium">Discuss Your Project</span>
+                        </motion.a>
+                    </motion.div>
                 </div>
             </section>
 
@@ -778,74 +954,135 @@ const App = () => {
                 </div>
             </section>
 
-            {/* Gallery Section */}
-            <section id="gallery" className="py-28 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+            {/* Premium Gallery Section */}
+            <section id="gallery" className="py-32 px-4 sm:px-6 lg:px-8 relative">
+                {/* Background decoration */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute top-1/2 left-0 w-72 h-72 bg-gradient-to-r from-amber-500/5 to-transparent rounded-full blur-3xl" />
+                </div>
+
+                <div className="max-w-7xl mx-auto relative">
                     <motion.div
-                        className="text-center mb-20"
+                        className="text-center mb-16"
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <motion.span
-                            className="inline-block px-6 py-2 mb-6 bg-gradient-to-r from-blue-900/40 to-cyan-900/40 rounded-full text-cyan-300 text-lg font-medium border border-cyan-500/30"
+                        <motion.div
+                            className="premium-badge mx-auto mb-8"
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
                             whileHover={{ scale: 1.05 }}
                         >
-                            Our Portfolio
-                        </motion.span>
-                        <h2 className="text-4xl md:text-6xl font-bold mb-8">
-                            <span className="block">Craftsmanship</span>
-                            <motion.span
-                                className="block bg-gradient-to-r from-blue-300 via-cyan-200 to-blue-400 bg-clip-text text-transparent"
-                                initial={{ backgroundPosition: "0% 50%" }}
-                                whileInView={{ backgroundPosition: "100% 50%" }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 3, ease: "easeInOut" }}
-                                style={{
-                                    backgroundImage: 'linear-gradient(90deg, #60a5fa, #22d3ee, #60a5fa)',
-                                    backgroundSize: '200% 200%',
-                                }}
-                            >
-                                In Every Detail
-                            </motion.span>
+                            <Image className="w-4 h-4" />
+                            <span>Our Portfolio</span>
+                        </motion.div>
+                        <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                            <span className="block mb-2">Craftsmanship</span>
+                            <span className="block gradient-text-animated">In Every Detail</span>
                         </h2>
-                        <p className="text-xl text-gray-300 max-w-4xl mx-auto">
+                        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                             Explore a selection of our finest residential and commercial projects across Montana.
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* Gallery Grid with varied sizes */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[
-                            { url: "/portfolio-1.png", title: "Modern Interior", category: "Residential" },
-                            { url: "/portfolio-2.png", title: "Commercial Complex", category: "Commercial" },
-                            { url: "/portfolio-3.png", title: "Luxury Renovation", category: "Remodel" },
-                            { url: "/portfolio-4.png", title: "Custom Texture", category: "Detailing" },
-                            { url: "/portfolio-5.png", title: "Open Concept", category: "Residential" },
-                            { url: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=800&q=80", title: "High Ceilings", category: "Custom" }
+                            { url: "/portfolio-1.png", title: "Modern Interior", category: "Residential", size: "normal", accent: "cyan" },
+                            { url: "/portfolio-2.png", title: "Commercial Complex", category: "Commercial", size: "tall", accent: "blue" },
+                            { url: "/portfolio-3.png", title: "Luxury Renovation", category: "Remodel", size: "normal", accent: "amber" },
+                            { url: "/portfolio-4.png", title: "Custom Texture", category: "Detailing", size: "normal", accent: "cyan" },
+                            { url: "/portfolio-5.png", title: "Open Concept", category: "Residential", size: "tall", accent: "blue" },
+                            { url: "https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=800&q=80", title: "High Ceilings", category: "Custom", size: "normal", accent: "amber" }
                         ].map((item, index) => (
                             <motion.div
                                 key={index}
-                                className="group relative overflow-hidden rounded-3xl h-80 glass-card border border-gray-700/30"
+                                className={`group relative overflow-hidden rounded-3xl ${item.size === 'tall' ? 'md:row-span-2 h-[500px]' : 'h-80'
+                                    } cursor-pointer`}
                                 initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                                whileHover={{ y: -5 }}
+                                whileHover={{ y: -8 }}
                             >
+                                {/* Image */}
                                 <img
                                     src={item.url}
                                     alt={item.title}
                                     loading="lazy"
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                                    <span className="text-cyan-400 font-medium mb-2">{item.category}</span>
-                                    <h3 className="text-2xl font-bold text-white">{item.title}</h3>
+
+                                {/* Gradient overlay - always visible at bottom */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                                {/* Hover overlay with glow */}
+                                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${item.accent === 'cyan' ? 'bg-gradient-to-t from-cyan-900/50 to-transparent' :
+                                    item.accent === 'blue' ? 'bg-gradient-to-t from-blue-900/50 to-transparent' :
+                                        'bg-gradient-to-t from-amber-900/50 to-transparent'
+                                    }`} />
+
+                                {/* Category badge */}
+                                <div className="absolute top-4 left-4">
+                                    <motion.span
+                                        className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider backdrop-blur-md ${item.accent === 'cyan' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/30' :
+                                            item.accent === 'blue' ? 'bg-blue-500/20 text-blue-300 border border-blue-400/30' :
+                                                'bg-amber-500/20 text-amber-300 border border-amber-400/30'
+                                            }`}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.3 + index * 0.1 }}
+                                    >
+                                        {item.category}
+                                    </motion.span>
                                 </div>
+
+                                {/* Content */}
+                                <div className="absolute bottom-0 left-0 right-0 p-6">
+                                    <motion.h3
+                                        className="text-2xl font-bold text-white mb-2 group-hover:translate-y-0 translate-y-2 transition-transform duration-300"
+                                    >
+                                        {item.title}
+                                    </motion.h3>
+                                    <motion.div
+                                        className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                    >
+                                        <span className="text-gray-300 text-sm">View Project</span>
+                                        <ChevronRight className="w-4 h-4 text-gray-300" />
+                                    </motion.div>
+                                </div>
+
+                                {/* Border glow on hover */}
+                                <div className={`absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${item.accent === 'cyan' ? 'ring-2 ring-cyan-400/50' :
+                                    item.accent === 'blue' ? 'ring-2 ring-blue-400/50' :
+                                        'ring-2 ring-amber-400/50'
+                                    }`} />
                             </motion.div>
                         ))}
                     </div>
+
+                    {/* View all projects CTA */}
+                    <motion.div
+                        className="text-center mt-12"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5 }}
+                    >
+                        <motion.a
+                            href="#contact"
+                            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/30 text-white hover:text-cyan-400 transition-all font-medium"
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <span>Let's Create Your Project</span>
+                            <ChevronRight className="w-5 h-5" />
+                        </motion.a>
+                    </motion.div>
                 </div>
             </section>
 
@@ -862,29 +1099,21 @@ const App = () => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <motion.span
-                            className="inline-block px-6 py-2 mb-8 bg-gradient-to-r from-blue-900/40 to-cyan-900/40 rounded-full text-cyan-300 text-lg font-medium border border-cyan-500/30"
+                        <motion.div
+                            className="premium-badge mx-auto mb-8"
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
                             whileHover={{ scale: 1.05 }}
                         >
-                            Get In Touch
-                        </motion.span>
+                            <Mail className="w-4 h-4" />
+                            <span>Get In Touch</span>
+                        </motion.div>
                         <h2 className="text-4xl md:text-6xl font-bold mb-8">
-                            <span className="block">Contact Creative</span>
-                            <motion.span
-                                className="block bg-gradient-to-r from-blue-300 via-cyan-200 to-blue-400 bg-clip-text text-transparent"
-                                initial={{ backgroundPosition: "0% 50%" }}
-                                whileInView={{ backgroundPosition: "100% 50%" }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 3 }}
-                                style={{
-                                    backgroundImage: 'linear-gradient(90deg, #60a5fa, #22d3ee, #60a5fa)',
-                                    backgroundSize: '200% 200%',
-                                }}
-                            >
-                                Drywall Today
-                            </motion.span>
+                            <span className="block mb-2">Contact Creative</span>
+                            <span className="block gradient-text-animated">Drywall Today</span>
                         </h2>
-                        <p className="text-xl text-gray-300 max-w-4xl mx-auto">
+                        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                             Reach out to the Thompson family for a free consultation and detailed quote for your
                             residential or commercial drywall project.
                         </p>
@@ -1443,14 +1672,14 @@ const App = () => {
                             <div className="flex items-center space-x-4 mb-8">
                                 {/* Updated Company Logo in Footer */}
                                 <motion.div
-                                    className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 backdrop-blur-md shadow-lg shadow-cyan-500/10"
-                                    whileHover={{ scale: 1.05, rotate: 5 }}
+                                    className="flex items-center justify-center px-3 py-2 rounded-2xl bg-white border border-white/10 backdrop-blur-md shadow-lg shadow-cyan-500/10"
+                                    whileHover={{ scale: 1.05, rotate: 2 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
                                     <img
-                                        src="/favicon.ico"
+                                        src="/logo.png"
                                         alt="Creative Drywall Logo"
-                                        className="w-10 h-10 object-contain drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]"
+                                        className="h-14 w-auto object-contain"
                                     />
                                 </motion.div>
                                 <div className="flex flex-col items-start">
@@ -1599,11 +1828,30 @@ const App = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.6 }}
                         >
+
                             Powered by <span className="text-cyan-500/70 font-bold">TECHGURU</span>
                         </motion.p>
                     </div>
                 </div>
             </footer>
+
+            {/* Floating Back to Top Button */}
+            <AnimatePresence>
+                {scrollY > 500 && (
+                    <motion.button
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        className="fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/30 flex items-center justify-center hover:shadow-cyan-500/50 transition-shadow"
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        whileHover={{ scale: 1.1, y: -3 }}
+                        whileTap={{ scale: 0.95 }}
+                        aria-label="Back to top"
+                    >
+                        <ArrowDown className="w-6 h-6 rotate-180" />
+                    </motion.button>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
