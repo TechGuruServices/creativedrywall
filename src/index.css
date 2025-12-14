@@ -187,9 +187,11 @@
             opacity: 0.5;
         }
 
-        /* Better touch scrolling */
-        html {
-            -webkit-overflow-scrolling: touch;
+        /* Better touch scrolling - legacy iOS support */
+        @supports (-webkit-overflow-scrolling: touch) {
+            html {
+                -webkit-overflow-scrolling: touch;
+            }
         }
 
         /* Prevent text size adjustment */
@@ -271,8 +273,15 @@
             width: 0;
             height: 0;
         }
+    }
 
-        scrollbar-width: none;
+    /* Firefox scrollbar hiding - in @supports for compat */
+    @supports (scrollbar-width: none) {
+        @media (max-width: 768px) {
+            html {
+                scrollbar-width: none;
+            }
+        }
     }
 }
 
