@@ -732,11 +732,12 @@ const App = () => {
                                     />
                                 </div>
 
-                                {/* Learn more link */}
+                                {/* Get a Quote button */}
                                 <motion.a
                                     href="#contact"
-                                    className="inline-flex items-center gap-2 mt-6 text-sm font-medium text-gray-400 hover:text-cyan-400 transition-colors group/link"
-                                    whileHover={{ x: 5 }}
+                                    className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 text-cyan-400 hover:from-cyan-500/20 hover:to-blue-500/20 hover:border-cyan-400/50 hover:text-cyan-300 transition-all duration-300 cursor-pointer"
+                                    whileHover={{ scale: 1.05, x: 5 }}
+                                    whileTap={{ scale: 0.95 }}
                                 >
                                     <span>Get a Quote</span>
                                     <ChevronRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
