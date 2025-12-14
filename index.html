@@ -54,8 +54,28 @@
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 
-  <!-- Tidio Live Chat Widget -->
+  <!-- Tidio Live Chat Widget with Custom Styling -->
   <script src="https://code.tidio.co/fplvxp9xeevdszmpnbi3tqnk0kf2w7d9.js" async></script>
+  <script>
+    // Wait for Tidio to load and apply custom styling
+    document.addEventListener('tidioChat-ready', function() {
+      // Set custom colors using Tidio API
+      if (window.tidioChatApi) {
+        window.tidioChatApi.setColorPalette({
+          buttonBackground: '#22d3ee',      // Cyan accent
+          buttonFontColor: '#ffffff',
+          chatBackground: '#0f172a',         // Dark slate background
+          mainBackground: '#1e293b',         // Secondary background
+          visitorMessageBackground: '#0891b2', // Teal for visitor messages
+          visitorMessageFontColor: '#ffffff',
+          operatorMessageBackground: '#334155', // Slate for operator messages
+          operatorMessageFontColor: '#ffffff',
+          headerBackground: '#0891b2',       // Cyan header
+          headerFontColor: '#ffffff'
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
