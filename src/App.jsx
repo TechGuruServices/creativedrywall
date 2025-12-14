@@ -338,6 +338,27 @@ const App = () => {
                                         <Phone className="w-5 h-5" />
                                         <span>(406) 239-0850</span>
                                     </motion.a>
+
+                                    {/* Mobile Theme Toggle */}
+                                    <motion.button
+                                        onClick={() => setIsDarkMode(!isDarkMode)}
+                                        className="flex items-center space-x-3 px-4 py-3 rounded-lg font-medium text-gray-300 hover:text-cyan-300 hover:bg-gray-800/30 w-full"
+                                        whileHover={{ x: 5 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+                                    >
+                                        {isDarkMode ? (
+                                            <>
+                                                <Sun className="w-5 h-5 text-amber-400" />
+                                                <span>Switch to Light Mode</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Moon className="w-5 h-5 text-cyan-300" />
+                                                <span>Switch to Dark Mode</span>
+                                            </>
+                                        )}
+                                    </motion.button>
                                 </div>
                             </motion.div>
                         )}
@@ -721,7 +742,7 @@ const App = () => {
                                 {/* Get a Quote button - Premium animated CTA */}
                                 <motion.button
                                     onClick={() => {
-                                        document.getElementById('contact')?.scrollIntoView({ 
+                                        document.getElementById('contact')?.scrollIntoView({
                                             behavior: 'smooth',
                                             block: 'start'
                                         });
@@ -736,15 +757,15 @@ const App = () => {
                                 >
                                     {/* Gradient background */}
                                     <span className={`absolute inset-0 bg-gradient-to-r ${service.accent === 'cyan' ? 'from-cyan-500/20 to-blue-500/20' : service.accent === 'blue' ? 'from-blue-500/20 to-indigo-500/20' : 'from-amber-500/20 to-orange-500/20'}`} />
-                                    
+
                                     {/* Border with glow */}
                                     <span className={`absolute inset-0 rounded-xl border ${service.accent === 'cyan' ? 'border-cyan-500/40 group-hover/btn:border-cyan-400/70 group-hover/btn:shadow-[0_0_20px_rgba(34,211,238,0.3)]' : service.accent === 'blue' ? 'border-blue-500/40 group-hover/btn:border-blue-400/70 group-hover/btn:shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'border-amber-500/40 group-hover/btn:border-amber-400/70 group-hover/btn:shadow-[0_0_20px_rgba(245,158,11,0.3)]'} transition-all duration-500`} />
-                                    
+
                                     {/* Shimmer effect on hover */}
                                     <motion.span
                                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000"
                                     />
-                                    
+
                                     {/* Text content */}
                                     <span className={`relative z-10 flex items-center gap-2 ${service.accent === 'cyan' ? 'text-cyan-400 group-hover/btn:text-cyan-300' : service.accent === 'blue' ? 'text-blue-400 group-hover/btn:text-blue-300' : 'text-amber-400 group-hover/btn:text-amber-300'} transition-colors duration-300`}>
                                         <Star className="w-4 h-4" />
