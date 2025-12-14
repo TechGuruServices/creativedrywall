@@ -152,6 +152,128 @@
     ::-webkit-scrollbar-thumb:hover {
         background: linear-gradient(180deg, var(--accent-blue), var(--accent-cyan));
     }
+
+    /* ========================================
+       MOBILE & TOUCH OPTIMIZATIONS
+       ======================================== */
+
+    /* Improve tap target sizes on mobile */
+    @media (max-width: 768px) {
+
+        button,
+        a,
+        input[type="submit"],
+        .glass-button {
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        /* Reduce heavy animations on mobile for performance */
+        .glass-card::before,
+        .glass-card::after,
+        .glass-button::before {
+            display: none;
+        }
+
+        /* Optimize backdrop-filter for mobile */
+        .glass-card,
+        .glass-button {
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+        }
+
+        /* Reduce particle count visually */
+        body::before {
+            opacity: 0.5;
+        }
+
+        /* Better touch scrolling */
+        html {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevent text size adjustment */
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+    }
+
+    /* Reduce motion for users who prefer it */
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        .gradient-text-animated {
+            animation: none;
+        }
+
+        .float-animation,
+        .pulse-glow,
+        .shimmer {
+            animation: none;
+        }
+    }
+
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+
+        .glass-card,
+        .glass-button {
+            border-width: 2px;
+        }
+
+        .text-gray-400,
+        .text-gray-500 {
+            color: var(--text-secondary) !important;
+        }
+    }
+
+    /* Touch device hover state fix */
+    @media (hover: none) {
+
+        .glass-card:hover,
+        .glass-button:hover {
+            transform: none;
+        }
+    }
+
+    /* Desktop enhancements */
+    @media (min-width: 1024px) {
+
+        /* Smooth scroll for desktop only */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced hover effects */
+        .glass-card:hover {
+            transform: translateY(-8px) rotateX(2deg);
+        }
+    }
+
+    /* Large desktop screens */
+    @media (min-width: 1536px) {
+        body {
+            font-size: 18px;
+        }
+    }
+
+    /* Hide scrollbar on mobile */
+    @media (max-width: 768px) {
+        ::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+
+        scrollbar-width: none;
+    }
 }
 
 @layer components {
