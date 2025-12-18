@@ -3,10 +3,15 @@
 
 <head>
   <meta charset="UTF-8" />
-  <!-- Favicons -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon.png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <!-- Favicons - Comprehensive for Google Search -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <!-- Mobile App Meta Tags -->
@@ -45,6 +50,46 @@
   <meta property="twitter:description"
     content="Premier drywall contractor serving Montana since 1976. Expert hanging, taping, texturing, and repairs for residential and commercial projects.">
   <meta property="twitter:image" content="/logo.png">
+
+  <!-- Structured Data for Local Business SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Creative Drywall",
+    "image": "https://creativedrywall.buzz/logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "6785 Prairie Schooner Lane",
+      "addressLocality": "Missoula",
+      "addressRegion": "MT",
+      "postalCode": "59808",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "46.9197",
+      "longitude": "-114.0883"
+    },
+    "url": "https://creativedrywall.buzz/",
+    "telephone": "+14062390850",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "08:00",
+        "closes": "17:00"
+      }
+    ],
+    "priceRange": "$$"
+  }
+  </script>
 </head>
 
 <body>
@@ -58,7 +103,7 @@
   <script src="https://code.tidio.co/fplvxp9xeevdszmpnbi3tqnk0kf2w7d9.js" async></script>
   <script>
     // Wait for Tidio to load and apply custom styling
-    document.addEventListener('tidioChat-ready', function() {
+    document.addEventListener('tidioChat-ready', function () {
       // Set custom colors using Tidio API
       if (window.tidioChatApi) {
         window.tidioChatApi.setColorPalette({

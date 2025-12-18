@@ -1475,7 +1475,7 @@ const App = () => {
                                 </div>
                                 <h3 className="text-3xl font-bold mb-4">Contact Information</h3>
                                 <p className="text-gray-400 text-lg mb-6">
-                                    Reach out to the Thompson family directly or visit our office in Missoula, Montana.
+                                    Reach out to the Thompson family directly or visit our office at <a href="https://www.google.com/maps/search/?api=1&query=6785+Prairie+Schooner+Lane+Missoula+MT+59808" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors underline decoration-cyan-400/30 underline-offset-4">6785 Prairie Schooner Lane, Missoula, MT 59808</a>.
                                 </p>
                             </div>
 
@@ -1522,16 +1522,21 @@ const App = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.6 }}
                                 >
-                                    <div className="flex items-start space-x-4 p-6 bg-gray-800/30 rounded-2xl border border-gray-700/40">
-                                        <div className="w-12 h-12 bg-gray-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                            <MapPin className="w-6 h-6 text-gray-400" />
+                                    <a
+                                        href="https://www.google.com/maps/search/?api=1&query=6785+Prairie+Schooner+Lane+Missoula+MT+59808"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-start space-x-4 p-6 bg-gray-800/30 rounded-2xl border border-gray-700/40 hover:border-cyan-500/50 transition-all group"
+                                    >
+                                        <div className="w-12 h-12 bg-gray-500/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-cyan-500/20 transition-colors">
+                                            <MapPin className="w-6 h-6 text-gray-400 group-hover:text-cyan-400 transition-colors" />
                                         </div>
                                         <div>
                                             <h4 className="text-xl font-bold mb-2 text-white">Location</h4>
-                                            <p className="text-2xl font-bold text-gray-300">Missoula, Montana</p>
-                                            <p className="text-gray-400">Serving all surrounding valleys</p>
+                                            <p className="text-2xl font-bold text-gray-300 group-hover:text-cyan-300 transition-colors">6785 Prairie Schooner Lane</p>
+                                            <p className="text-gray-400">Missoula, MT 59808</p>
                                         </div>
-                                    </div>
+                                    </a>
                                 </motion.div>
 
                                 <motion.div
@@ -1723,10 +1728,15 @@ const App = () => {
                                     <Mail className="w-6 h-6 text-cyan-400" />
                                     <span className="font-medium break-all">info@creativedrywall.buzz</span>
                                 </div>
-                                <div className="flex items-center space-x-4 text-lg">
-                                    <MapPin className="w-6 h-6 text-cyan-400" />
-                                    <span className="font-medium">Missoula, Montana</span>
-                                </div>
+                                <a
+                                    href="https://www.google.com/maps/search/?api=1&query=6785+Prairie+Schooner+Lane+Missoula+MT+59808"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center space-x-4 text-lg hover:text-cyan-300 transition-colors group"
+                                >
+                                    <MapPin className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform" />
+                                    <span className="font-medium">6785 Prairie Schooner Lane, Missoula, MT 59808</span>
+                                </a>
                             </div>
                         </div>
 
