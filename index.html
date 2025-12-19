@@ -64,14 +64,48 @@
   <meta property="twitter:image" content="https://creativedrywall.buzz/icon-512x512.png">
   <meta property="twitter:image:alt" content="Creative Drywall Logo">
 
-  <!-- Structured Data for Local Business SEO -->
+  <!-- Organization Schema for Google SERP Logo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Creative Drywall",
+    "url": "https://creativedrywall.buzz/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://creativedrywall.buzz/icon-512x512.png",
+      "width": 512,
+      "height": 512
+    },
+    "image": "https://creativedrywall.buzz/icon-512x512.png",
+    "email": "info@creativedrywall.buzz",
+    "telephone": "+14062390850",
+    "sameAs": [],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+14062390850",
+      "contactType": "customer service",
+      "areaServed": "US-MT",
+      "availableLanguage": "English"
+    }
+  }
+  </script>
+
+  <!-- LocalBusiness Schema for Local SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://creativedrywall.buzz/#business",
     "name": "Creative Drywall",
     "image": "https://creativedrywall.buzz/icon-512x512.png",
-    "logo": "https://creativedrywall.buzz/icon-512x512.png",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://creativedrywall.buzz/icon-512x512.png",
+      "width": 512,
+      "height": 512
+    },
+    "description": "Premier drywall contractor serving Montana since 1976. Expert hanging, taping, texturing, and repairs for residential and commercial projects.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "6785 Prairie Schooner Lane",
@@ -87,16 +121,15 @@
     },
     "url": "https://creativedrywall.buzz/",
     "telephone": "+14062390850",
+    "email": "info@creativedrywall.buzz",
+    "areaServed": {
+      "@type": "State",
+      "name": "Montana"
+    },
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday"
-        ],
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "opens": "08:00",
         "closes": "17:00"
       }

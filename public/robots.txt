@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
-Sitemap: https://creativedrywall.com/sitemap.xml
+Allow: /*icon*
+Allow: /*logo*
+Allow: /*favicon*
+
+# Sitemap
+Sitemap: https://creativedrywall.buzz/sitemap.xml
