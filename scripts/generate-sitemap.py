@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 import os
 
 # ===== CONFIG =====
-SITE_URL = "https://creativedrywall.pages.dev"   # change if you add a custom domain
+SITE_URL = "https://creativedrywall.buzz"   # Production custom domain
 BUILD_DIR = Path("dist")                         # change to your build output folder
 OUTPUT_FILE = BUILD_DIR / "sitemap.xml"
 
