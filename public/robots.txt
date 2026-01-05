@@ -1,8 +1,11 @@
 User-agent: *
 Allow: /
-Allow: /*icon*
-Allow: /*logo*
-Allow: /*favicon*
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 # Sitemap
 Sitemap: https://creativedrywall.buzz/sitemap.xml
