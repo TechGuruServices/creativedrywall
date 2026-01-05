@@ -14,9 +14,22 @@ PAGE_FILES = {"index.html"}
 EXCLUDE_DIRS = {".git", ".github", "assets", "static", "images", "img", "css", "js"}
 EXCLUDE_FILES = {"404.html"}  # add more if needed
 
+# SPA Section URLs to include (hash-based navigation)
+SECTION_URLS = [
+    {"path": "#services", "priority": "0.9", "changefreq": "monthly"},
+    {"path": "#about", "priority": "0.8", "changefreq": "monthly"},
+    {"path": "#gallery", "priority": "0.7", "changefreq": "monthly"},
+    {"path": "#quote-calculator", "priority": "0.8", "changefreq": "monthly"},
+    {"path": "#contact", "priority": "0.9", "changefreq": "monthly"},
+    {"path": "#service-area-missoula", "priority": "0.9", "changefreq": "monthly"},
+]
+
 def iso_date_from_mtime(path: Path) -> str:
     ts = path.stat().st_mtime
     return datetime.fromtimestamp(ts, tz=timezone.utc).date().isoformat()
+
+def get_today_iso() -> str:
+    return datetime.now(tz=timezone.utc).date().isoformat()
 
 def url_from_path(html_path: Path) -> str:
     # dist/services/index.html -> /services/
@@ -48,6 +61,8 @@ def main():
         raise SystemExit(f"BUILD_DIR not found: {BUILD_DIR.resolve()}")
 
     urls = []
+    today = get_today_iso()
+    
     for root, dirs, files in os.walk(BUILD_DIR):
         root_path = Path(root)
 
@@ -61,19 +76,31 @@ def main():
             if f.lower() in PAGE_FILES:
                 loc = url_from_path(p)
                 lastmod = iso_date_from_mtime(p)
-                urls.append((loc, lastmod))
+                urls.append({"loc": loc, "lastmod": lastmod, "priority": "1.0", "changefreq": "weekly"})
 
-    urls = sorted(set(urls), key=lambda x: x[0])
+    # Add SPA section URLs
+    for section in SECTION_URLS:
+        urls.append({
+            "loc": SITE_URL + "/" + section["path"],
+            "lastmod": today,
+            "priority": section["priority"],
+            "changefreq": section["changefreq"]
+        })
+
+    # Sort by loc
+    urls = sorted(urls, key=lambda x: x["loc"])
 
     xml_lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
-        '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ]
-    for loc, lastmod in urls:
+    for url in urls:
         xml_lines += [
             "  <url>",
-            f"    <loc>{loc}</loc>",
-            f"    <lastmod>{lastmod}</lastmod>",
+            f"    <loc>{url['loc']}</loc>",
+            f"    <lastmod>{url['lastmod']}</lastmod>",
+            f"    <changefreq>{url['changefreq']}</changefreq>",
+            f"    <priority>{url['priority']}</priority>",
             "  </url>",
         ]
     xml_lines.append("</urlset>")
