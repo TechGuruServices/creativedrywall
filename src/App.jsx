@@ -576,7 +576,7 @@ const App = () => {
 
                     {/* Stats Section */}
                     <motion.div
-                        className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 max-w-4xl mx-auto"
+                        className="flex flex-wrap justify-center gap-6 mt-20 max-w-4xl mx-auto"
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1.1, duration: 0.8 }}
@@ -588,7 +588,7 @@ const App = () => {
                         ].map((stat, index) => (
                             <motion.div
                                 key={stat.label}
-                                className="glass-card text-center p-6 rounded-2xl"
+                                className="glass-card text-center p-6 rounded-2xl w-40 sm:w-48"
                                 whileHover={{ y: -8, scale: 1.02 }}
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -1687,8 +1687,8 @@ const App = () => {
                                     <motion.div
                                         key={item.city}
                                         className={`flex items-center gap-3 p-4 rounded-xl ${item.highlight
-                                                ? 'bg-cyan-500/20 border border-cyan-500/30'
-                                                : 'bg-gray-800/40 border border-gray-700/30'
+                                            ? 'bg-cyan-500/20 border border-cyan-500/30'
+                                            : 'bg-gray-800/40 border border-gray-700/30'
                                             }`}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
