@@ -128,3 +128,18 @@ Thumbs.db
 *.rar
 *.tar
 *.gz
+
+# Windows shortcuts
+*.lnk
+
+# Backup directories
+dist_backup/
+
+# VS Code workspace files (user-specific)
+*.code-workspace
+
+# Build logs (specific)
+build.log
+build_cmd.log
+build_error_2.log
+build_verbose.log
