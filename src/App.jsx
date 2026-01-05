@@ -584,8 +584,7 @@ const App = () => {
                         {[
                             { number: "49+", label: "Years Experience", icon: <Calendar className="w-6 h-6" /> },
                             { number: "1,200+", label: "Projects Completed", icon: <Hammer className="w-6 h-6" /> },
-                            { number: "4", label: "Family Generations", icon: <Users className="w-6 h-6" /> },
-                            { number: "100%", label: "Customer Satisfaction", icon: <Star className="w-6 h-6" /> }
+                            { number: "4", label: "Family Generations", icon: <Users className="w-6 h-6" /> }
                         ].map((stat, index) => (
                             <motion.div
                                 key={stat.label}
@@ -1622,8 +1621,8 @@ const App = () => {
                             <span className="block gradient-text-animated">Drywall Contractor</span>
                         </h2>
                         <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                            Creative Drywall proudly serves Missoula, Montana and surrounding communities with professional 
-                            drywall installation, repair, and texturing services. From residential homes to commercial buildings, 
+                            Creative Drywall proudly serves Missoula, Montana and surrounding communities with professional
+                            drywall installation, repair, and texturing services. From residential homes to commercial buildings,
                             we're your trusted local drywall contractor.
                         </p>
                     </motion.div>
@@ -1669,11 +1668,11 @@ const App = () => {
                                 <span>Cities We Serve</span>
                             </h3>
                             <p className="text-gray-400 mb-8">
-                                As Missoula's leading drywall contractor, we provide expert drywall services throughout 
-                                Western Montana. Our skilled team travels to serve residential and commercial clients 
+                                As Missoula's leading drywall contractor, we provide expert drywall services throughout
+                                Western Montana. Our skilled team travels to serve residential and commercial clients
                                 in the following areas:
                             </p>
-                            
+
                             <div className="grid grid-cols-2 gap-4 mb-8">
                                 {[
                                     { city: 'Missoula', highlight: true },
@@ -1687,11 +1686,10 @@ const App = () => {
                                 ].map((item, index) => (
                                     <motion.div
                                         key={item.city}
-                                        className={`flex items-center gap-3 p-4 rounded-xl ${
-                                            item.highlight 
-                                                ? 'bg-cyan-500/20 border border-cyan-500/30' 
+                                        className={`flex items-center gap-3 p-4 rounded-xl ${item.highlight
+                                                ? 'bg-cyan-500/20 border border-cyan-500/30'
                                                 : 'bg-gray-800/40 border border-gray-700/30'
-                                        }`}
+                                            }`}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
