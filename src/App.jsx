@@ -1597,6 +1597,154 @@ const App = () => {
                 </div>
             </section>
 
+            {/* Service Area Section - Missoula Drywall Contractor */}
+            <section id="service-area-missoula" className="py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-gray-900/30">
+                <div className="max-w-7xl mx-auto">
+                    <motion.div
+                        className="text-center mb-16"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <motion.div
+                            className="premium-badge mx-auto mb-8"
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            <MapPin className="w-4 h-4" />
+                            <span>Service Area</span>
+                        </motion.div>
+                        <h2 className="text-4xl md:text-6xl font-bold mb-8">
+                            <span className="block mb-2">Missoula's Premier</span>
+                            <span className="block gradient-text-animated">Drywall Contractor</span>
+                        </h2>
+                        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                            Creative Drywall proudly serves Missoula, Montana and surrounding communities with professional 
+                            drywall installation, repair, and texturing services. From residential homes to commercial buildings, 
+                            we're your trusted local drywall contractor.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid lg:grid-cols-2 gap-12 items-start">
+                        {/* Google Maps Embed */}
+                        <motion.div
+                            className="glass-card rounded-3xl overflow-hidden border border-gray-700/30"
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <div className="p-6 border-b border-gray-700/30">
+                                <h3 className="text-2xl font-bold flex items-center gap-3">
+                                    <MapPin className="w-6 h-6 text-cyan-400" />
+                                    <span>Our Service Area</span>
+                                </h3>
+                            </div>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d172837.29878088098!2d-114.16835566406248!3d46.87218620000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x535dcc2a50f367cb%3A0xe9e31277ca94802e!2sMissoula%2C%20MT!5e0!3m2!1sen!2sus!4v1704419280000!5m2!1sen!2sus"
+                                width="100%"
+                                height="400"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                title="Creative Drywall Missoula Service Area Map"
+                                className="w-full"
+                            />
+                        </motion.div>
+
+                        {/* Cities We Serve */}
+                        <motion.div
+                            className="glass-card p-8 rounded-3xl border border-gray-700/30"
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                                <Zap className="w-6 h-6 text-cyan-400" />
+                                <span>Cities We Serve</span>
+                            </h3>
+                            <p className="text-gray-400 mb-8">
+                                As Missoula's leading drywall contractor, we provide expert drywall services throughout 
+                                Western Montana. Our skilled team travels to serve residential and commercial clients 
+                                in the following areas:
+                            </p>
+                            
+                            <div className="grid grid-cols-2 gap-4 mb-8">
+                                {[
+                                    { city: 'Missoula', highlight: true },
+                                    { city: 'Lolo', highlight: false },
+                                    { city: 'Florence', highlight: false },
+                                    { city: 'Stevensville', highlight: false },
+                                    { city: 'Hamilton', highlight: false },
+                                    { city: 'Frenchtown', highlight: false },
+                                    { city: 'Bonner', highlight: false },
+                                    { city: 'East Missoula', highlight: false }
+                                ].map((item, index) => (
+                                    <motion.div
+                                        key={item.city}
+                                        className={`flex items-center gap-3 p-4 rounded-xl ${
+                                            item.highlight 
+                                                ? 'bg-cyan-500/20 border border-cyan-500/30' 
+                                                : 'bg-gray-800/40 border border-gray-700/30'
+                                        }`}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: index * 0.1 }}
+                                    >
+                                        <CheckCircle className={`w-5 h-5 ${item.highlight ? 'text-cyan-400' : 'text-gray-500'}`} />
+                                        <span className={item.highlight ? 'font-bold text-cyan-300' : 'text-gray-300'}>
+                                            {item.city}, MT
+                                        </span>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            <div className="bg-gray-800/40 rounded-2xl p-6 border border-gray-700/30">
+                                <h4 className="font-bold text-lg mb-3 text-cyan-300">Drywall Services in Missoula Include:</h4>
+                                <ul className="space-y-2 text-gray-300">
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4 text-cyan-400" />
+                                        <span>New construction drywall installation</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4 text-cyan-400" />
+                                        <span>Drywall repair and patching</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4 text-cyan-400" />
+                                        <span>Texture matching and application</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4 text-cyan-400" />
+                                        <span>Water damage restoration</span>
+                                    </li>
+                                    <li className="flex items-center gap-2">
+                                        <CheckCircle className="w-4 h-4 text-cyan-400" />
+                                        <span>Commercial drywall projects</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <motion.a
+                                href="#contact"
+                                className="glass-button w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold py-4 px-8 rounded-2xl text-lg transition-all duration-300 transform flex items-center justify-center gap-3"
+                                whileHover={{ scale: 1.02, y: -2 }}
+                                whileTap={{ scale: 0.98 }}
+                            >
+                                <Phone className="w-5 h-5" />
+                                <span>Get a Free Missoula Estimate</span>
+                            </motion.a>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
             {/* CTA Section */}
             <section className="py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-900/70 to-gray-800/50">
                 <div className="max-w-5xl mx-auto text-center">
