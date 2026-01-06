@@ -213,7 +213,7 @@ const App = () => {
                         </motion.a>
 
                         {/* Desktop Navigation */}
-                        <div className="hidden md:flex items-center space-x-2">
+                        <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
                             {navItems.map((item) => {
                                 const Icon = item.icon;
                                 return (
@@ -308,7 +308,7 @@ const App = () => {
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <div className="px-4 py-4 space-y-2">
+                                <div className="px-4 py-6 space-y-4">
                                     {navItems.map((item) => {
                                         const Icon = item.icon;
                                         return (
