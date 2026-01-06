@@ -155,10 +155,44 @@ export default function ChatWidget() {
         }
     }, []);
 
+    // Auto-reply content map
+    const AUTO_RESPONSES = {
+        "I'd like to get a quote for drywall services.": "Excellent choice! To provide an accurate quote, we'd love to know more about your project. You can use our Quote Calculator above, or call us directly at **(406) 239-0850**.",
+        "What areas do you serve?": "We proudly serve the entire **Missoula Valley** and surrounding areas, including Lolo, Florence, Stevensville, Victor, Corvallis, Hamilton, and Frenchtown. If you're in Western Montana, we've got you covered!",
+        "Can you tell me about your pricing?": "Our pricing is tailored to your specific project needs (square footage, finish level, etc.) to ensure the best value. We offer premium craftsmanship at competitive rates. Call us at **(406) 239-0850** for a free estimate!",
+        "How can I contact Creative Drywall directly?": "We're here to help! You can reach us directly at **(406) 239-0850**. Alternatively, feel free to fill out the contact form below, and we'll get back to you within 24 hours."
+    };
+
     // Handle quick reply click
     const handleQuickReply = useCallback((message) => {
-        setInput(message);
-        inputRef.current?.focus();
+        // Add user message immediately
+        const userMessage = {
+            role: 'user',
+            content: message,
+            timestamp: new Date()
+        };
+        setMessages(prev => [...prev, userMessage]);
+
+        // Check for auto-response
+        const autoResponse = AUTO_RESPONSES[message];
+
+        if (autoResponse) {
+            setIsLoading(true);
+            // Simulate natural typing delay (800ms)
+            setTimeout(() => {
+                setMessages(prev => [...prev, {
+                    role: 'assistant',
+                    content: autoResponse,
+                    timestamp: new Date()
+                }]);
+                setIsLoading(false);
+                notificationSound.current?.play();
+            }, 800);
+        } else {
+            // Fallback to normal send if no auto-response match (shouldn't happen with current config)
+            setInput(message);
+            inputRef.current?.focus();
+        }
     }, []);
 
     const sendMessage = async (messageText = input) => {
