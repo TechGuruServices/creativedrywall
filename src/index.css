@@ -1090,101 +1090,89 @@ body.light #tidio-chat-input {
    ======================================== */
 
 /* ========================================
-   BACK TO TOP BUTTON - Split Corner Strategy
+   BACK TO TOP BUTTON - Always LEFT Side
    ======================================== */
 
-/* Mobile: Arrow on LEFT */
 button[aria-label="Back to top"] {
     left: 20px !important;
     right: auto !important;
 }
 
-/* Desktop: Arrow returns to RIGHT */
-@media (min-width: 768px) {
-    button[aria-label="Back to top"] {
-        left: auto !important;
-        right: 32px !important;
-    }
-}
-
-/* Floating Action Button */
+/* Floating Action Button - Premium Frosted Glass Design */
 .chat-fab {
     position: fixed;
     bottom: 90px;
     right: 16px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-    border: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #22d3ee;
     box-shadow:
-        0 8px 32px rgba(34, 211, 238, 0.3),
-        0 4px 16px rgba(0, 0, 0, 0.2);
+        0 4px 24px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
     z-index: 1000;
-    transition: all 0.3s ease;
-    animation: chat-float 4s ease-in-out infinite, chat-glow-pulse 3s ease-in-out infinite;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Smooth floating animation */
-@keyframes chat-float {
-
-    0%,
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-
-    25% {
-        transform: translateY(-8px) rotate(1deg);
-    }
-
-    50% {
-        transform: translateY(-12px) rotate(0deg);
-    }
-
-    75% {
-        transform: translateY(-8px) rotate(-1deg);
-    }
-}
-
-/* Subtle pulsing glow effect */
-@keyframes chat-glow-pulse {
-
-    0%,
-    100% {
-        box-shadow:
-            0 8px 32px rgba(34, 211, 238, 0.3),
-            0 4px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    50% {
-        box-shadow:
-            0 8px 40px rgba(34, 211, 238, 0.5),
-            0 4px 20px rgba(0, 0, 0, 0.25),
-            0 0 30px rgba(34, 211, 238, 0.2);
-    }
+.chat-fab::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(59, 130, 246, 0.05));
+    opacity: 0;
+    transition: opacity 0.35s ease;
 }
 
 .chat-fab:hover {
-    transform: translateY(-4px) scale(1.05);
+    transform: translateY(-3px) scale(1.04);
+    border-color: rgba(34, 211, 238, 0.35);
     box-shadow:
-        0 12px 40px rgba(34, 211, 238, 0.4),
-        0 6px 20px rgba(0, 0, 0, 0.3);
-    animation-play-state: paused;
+        0 8px 32px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.chat-fab:hover::before {
+    opacity: 1;
+}
+
+.chat-fab:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+/* Light mode adjustments */
+body.light .chat-fab {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.98));
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #0891b2;
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+body.light .chat-fab:hover {
+    border-color: rgba(8, 145, 178, 0.3);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
     .chat-fab {
-        animation: none;
+        transition: none;
     }
 
     .chat-fab:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
     }
 }
 
