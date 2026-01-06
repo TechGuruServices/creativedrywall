@@ -784,8 +784,8 @@ const App = () => {
                 </div>
             </section>
 
-            {/* About Section */}
-            <section id="about" className="py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-900/50 to-gray-800/30">
+            {/* About Section - Alternating lighter background */}
+            <section id="about" className="py-28 px-4 sm:px-6 lg:px-8 bg-white/[0.02]">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <motion.div
@@ -795,7 +795,7 @@ const App = () => {
                             transition={{ duration: 0.8 }}
                         >
                             <motion.span
-                                className="inline-block px-6 py-2 mb-8 bg-gradient-to-r from-blue-900/40 to-cyan-900/40 rounded-full text-cyan-300 text-lg font-medium border border-cyan-500/30"
+                                className="inline-block px-6 py-2 mb-8 bg-gradient-to-r from-blue-900/30 to-cyan-900/30 rounded-full text-cyan-300 text-lg font-medium border border-cyan-500/20"
                                 whileHover={{ scale: 1.05 }}
                             >
                                 Since 1976
@@ -1594,7 +1594,7 @@ const App = () => {
             </section>
 
             {/* Service Area Section - Missoula Drywall Contractor */}
-            <section id="service-area-missoula" className="py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-gray-900/30">
+            <section id="service-area-missoula" className="py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-gray-900/20">
                 <div className="max-w-7xl mx-auto">
                     <motion.div
                         className="text-center mb-16"
@@ -1740,8 +1740,8 @@ const App = () => {
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-900/70 to-gray-800/50">
+            {/* CTA Section - Subtle alternation */}
+            <section className="py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-900/40 to-gray-800/30 backdrop-blur-sm">
                 <div className="max-w-5xl mx-auto text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}

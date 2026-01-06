@@ -24,23 +24,30 @@
 
     /* Dark mode (default) - Premium Color Palette */
     body {
-        --bg-primary: #0a0a0f;
-        --bg-secondary: #12121a;
-        --bg-tertiary: #1a1a24;
-        --bg-card: rgba(18, 18, 26, 0.8);
+        --bg-primary: #141821;
+        /* Soft Charcoal - Lighter than black */
+        --bg-secondary: #0F1216;
+        /* Deep Charcoal - For gradients */
+        --bg-tertiary: #1e222b;
+        /* Lighter accent background */
+        --bg-card: rgba(20, 24, 33, 0.85);
+        /* Slightly lighter card bg */
         --text-primary: #ffffff;
-        --text-secondary: #a1a1aa;
-        --text-muted: #71717a;
+        --text-secondary: #B2B8C2;
+        /* Improved contrast gray */
+        --text-muted: #848b96;
+        /* Lighter muted text */
         --accent-gold: #d4af37;
         --accent-gold-light: #f4d03f;
         --accent-cyan: #22d3ee;
         --accent-blue: #3b82f6;
         --accent-gradient-start: #22d3ee;
         --accent-gradient-end: #3b82f6;
-        --border-color: rgba(255, 255, 255, 0.06);
-        --border-hover: rgba(255, 255, 255, 0.12);
+        --border-color: rgba(255, 255, 255, 0.08);
+        --border-hover: rgba(255, 255, 255, 0.15);
         --glow-color: rgba(34, 211, 238, 0.15);
-        background: var(--bg-primary);
+
+        background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
         color: var(--text-primary);
         min-height: 100vh;
         overflow-x: hidden;
