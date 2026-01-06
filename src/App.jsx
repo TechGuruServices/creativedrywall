@@ -45,7 +45,7 @@ const App = () => {
             setScrollY(currentScrollY);
 
             // Update active section based on scroll position
-            const sections = ['home', 'services', 'about', 'gallery', 'contact'];
+            const sections = ['home', 'services', 'about', 'contact'];
             const currentSection = sections.find(section => {
                 const element = document.getElementById(section);
                 if (!element) return false;
@@ -158,7 +158,7 @@ const App = () => {
         { id: 'home', label: 'Home', icon: Home },
         { id: 'services', label: 'Services', icon: Briefcase },
         { id: 'about', label: 'About', icon: User },
-        { id: 'gallery', label: 'Gallery', icon: Image },
+
         { id: 'quote-calculator', label: 'Quote', icon: Calculator },
         { id: 'contact', label: 'Contact', icon: MessageCircle }
     ];
@@ -1942,16 +1942,7 @@ const App = () => {
                                         <span>About Us</span>
                                     </motion.a>
                                 </li>
-                                <li>
-                                    <motion.a
-                                        href="#"
-                                        className="hover:text-cyan-300 transition-colors duration-300 text-lg flex items-center space-x-2"
-                                        whileHover={{ x: 5 }}
-                                    >
-                                        <Image className="w-4 h-4" />
-                                        <span>Gallery</span>
-                                    </motion.a>
-                                </li>
+
                                 <li>
                                     <motion.a
                                         href="#contact"
