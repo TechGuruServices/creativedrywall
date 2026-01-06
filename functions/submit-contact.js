@@ -37,29 +37,31 @@ export async function onRequestPost({ request, env }) {
                 })
             });
             emailSuccess = response.ok;
-        } else if (env.RESEND_API_KEY) {
             // Resend Integration
-            const response = await fetch('https://api.resend.com/emails', {
+            const resendResponse = await fetch('https://api.resend.com/emails', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${env.RESEND_API_KEY}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    from: 'Creative Drywall <onboarding@resend.dev>', // Update this with verified domain if available
+                    from: 'Creative Drywall <info@creativedrywall.buzz>', // Using professional domain
                     to: ['info@creativedrywall.buzz'],
                     subject: `New Inquiry from ${name}`,
                     html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Phone:</strong> ${phone}</p><p><strong>Type:</strong> ${projectType}</p><p><strong>Message:</strong><br>${message}</p>`
                 })
             });
-            emailSuccess = response.ok;
-        } else {
-            // Fallback / Simulation (for dev or if no key provided yet)
-            console.log("No API key found (SENDGRID_API_KEY or RESEND_API_KEY). Simulating success.");
-            // We use the variables to pass linting even in simulation
-            const logSimulation = `Simulating email for project: ${projectType}`;
-            console.log(logSimulation);
+
+            if (!resendResponse.ok) {
+                const errorData = await resendResponse.json();
+                console.error("Resend API Error:", JSON.stringify(errorData));
+                throw new Error(`Email provider error: ${errorData.message || resendResponse.statusText}`);
+            }
             emailSuccess = true;
+        } else {
+            // No API key found
+            console.error("No email API keys configured (SENDGRID_API_KEY or RESEND_API_KEY)");
+            throw new Error("Server configuration error: Missing email provider credentials.");
         }
 
         if (emailSuccess) {
@@ -72,7 +74,9 @@ export async function onRequestPost({ request, env }) {
                 headers: { "Content-Type": "application/json" }
             });
         } else {
-            throw new Error("Failed to send email");
+            // If we got here, response.ok was false, but we didn't throw yet.
+            // (Though strict dispatch normally throws or returns earlier).
+            throw new Error("Failed to dispatch email.");
         }
 
     } catch (error) {
