@@ -194,12 +194,12 @@
             }
         }
 
-        /* Prevent text size adjustment - include both for cross-browser support */
+        /* Prevent text size adjustment - all vendor prefixes for cross-browser support */
         html {
             -webkit-text-size-adjust: 100%;
-            /* Safari/iOS */
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
             text-size-adjust: 100%;
-            /* Standard property */
         }
     }
 
@@ -1089,11 +1089,29 @@ body.light #tidio-chat-input {
    CUSTOM AI CHAT WIDGET
    ======================================== */
 
+/* ========================================
+   BACK TO TOP BUTTON - Split Corner Strategy
+   ======================================== */
+
+/* Mobile: Arrow on LEFT */
+button[aria-label="Back to top"] {
+    left: 20px !important;
+    right: auto !important;
+}
+
+/* Desktop: Arrow returns to RIGHT */
+@media (min-width: 768px) {
+    button[aria-label="Back to top"] {
+        left: auto !important;
+        right: 32px !important;
+    }
+}
+
 /* Floating Action Button */
 .chat-fab {
     position: fixed;
     bottom: 90px;
-    right: 24px;
+    right: 16px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
