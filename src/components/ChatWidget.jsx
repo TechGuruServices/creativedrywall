@@ -211,11 +211,14 @@ export default function ChatWidget() {
         setIsLoading(true);
 
         try {
-            // Build history for context (last 10 messages)
-            const history = messages.slice(-10).map(msg => ({
-                role: msg.role === 'assistant' ? 'model' : 'user',
-                content: msg.content
-            }));
+            // Build history for context (exclude the current message being sent)
+            // Filter out any potential invalid messages or welcome message
+            const history = messages
+                .filter(msg => !msg.isWelcome && msg.content)
+                .map(msg => ({
+                    role: msg.role === 'assistant' ? 'model' : 'user',
+                    content: msg.content
+                }));
 
             const response = await fetch('/api/chat', {
                 method: 'POST',

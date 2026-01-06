@@ -60,11 +60,18 @@ export async function onRequestPost({ request, env }) {
         const contents = [];
 
         // Add conversation history - strictly filter valid messages only
+        // Add conversation history - strictly filter valid messages only
         if (Array.isArray(history)) {
-            for (const msg of history) {
+            // Take only the last 10 messages to avoid token limits
+            const recentHistory = history.slice(-10);
+
+            for (const msg of recentHistory) {
                 if (msg.content && typeof msg.content === 'string' && msg.content.trim()) {
+                    // Map 'assistant' role to 'model' for Gemini
+                    const role = (msg.role === 'assistant' || msg.role === 'model') ? 'model' : 'user';
+
                     contents.push({
-                        role: msg.role === 'user' ? 'user' : 'model',
+                        role: role,
                         parts: [{ text: msg.content.trim() }]
                     });
                 }
