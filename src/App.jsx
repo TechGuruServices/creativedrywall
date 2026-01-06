@@ -1993,7 +1993,7 @@ const App = () => {
                             transition={{ delay: 0.6 }}
                         >
 
-                            Powered by <span className="text-cyan-500/70 font-bold">TECHGURU</span>
+                            Powered by <a href="https://techguruofficial.us" target="_blank" rel="noopener noreferrer" className="text-cyan-500/70 font-bold hover:text-cyan-400 transition-colors">TECHGURU</a>
                         </motion.p>
                     </div>
                 </div>
