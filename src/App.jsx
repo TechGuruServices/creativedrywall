@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { Phone, MapPin, ShieldCheck, Hammer, Users, Star, Calendar, CheckCircle, Clock, Mail, Menu, X, Home, Briefcase, User, Image, MessageCircle, Sun, Moon, Calculator, ArrowDown, Award, Sparkles, ChevronRight, Play, Zap } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import QuoteCalculator from './components/QuoteCalculator';
-import ChatWidget from './components/ChatWidget';
+
+// Lazy load ChatWidget for better initial load performance
+const ChatWidget = lazy(() => import('./components/ChatWidget'));
 
 const App = () => {
     const [formData, setFormData] = useState({
@@ -367,7 +369,10 @@ const App = () => {
             </motion.nav>
 
             {/* AI Chat Widget */}
-            <ChatWidget />
+            {/* AI Chat Widget - Lazy Loaded */}
+            <Suspense fallback={null}>
+                <ChatWidget />
+            </Suspense>
 
             {/* Premium Hero Section */}
             <section id="home" className="pt-40 md:pt-48 lg:pt-56 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
