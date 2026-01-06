@@ -27,9 +27,8 @@ const App = () => {
     const [activeSection, setActiveSection] = useState('home');
     const [isDarkMode, setIsDarkMode] = useState(true);
 
-    // Hero video URL (royalty-free construction video)
-    const heroVideoUrl = "https://videos.pexels.com/video-files/5477712/5477712-uhd_2560_1440_30fps.mp4";
-    const heroFallbackImage = "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1920&q=80";
+    // Hero background image (royalty-free construction image)
+    const heroBackgroundImage = "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1920&q=80";
 
     useEffect(() => {
         const handleScroll = () => {
@@ -372,19 +371,13 @@ const App = () => {
 
             {/* Premium Hero Section */}
             <section id="home" className="pt-40 md:pt-48 lg:pt-56 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
-                {/* Hero Background with Video */}
+                {/* Hero Background with Image */}
                 <div className="absolute inset-0">
-                    {/* Video Background */}
-                    <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        poster={heroFallbackImage}
-                        className="absolute inset-0 w-full h-full object-cover"
-                    >
-                        <source src={heroVideoUrl} type="video/mp4" />
-                    </video>
+                    {/* Background Image */}
+                    <div
+                        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+                        style={{ backgroundImage: `url(${heroBackgroundImage})` }}
+                    />
                     {/* Premium Overlay */}
                     <div className="absolute inset-0 hero-overlay"></div>
 
@@ -1814,17 +1807,7 @@ const App = () => {
                                 </motion.div>
                             </div>
 
-                            <motion.a
-                                href="#contact"
-                                className="glass-button w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-bold py-5 px-10 rounded-2xl text-xl transition-all duration-300 transform"
-                                whileHover={{ scale: 1.05, y: -5 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                <span className="relative z-10 flex items-center justify-center space-x-4">
-                                    <Star className="w-6 h-6" />
-                                    <span>Request Free Consultation</span>
-                                </span>
-                            </motion.a>
+
 
                             <motion.p
                                 className="text-gray-400 text-lg mt-6"
@@ -2023,7 +2006,7 @@ const App = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
-                        className="fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/30 flex items-center justify-center hover:shadow-cyan-500/50 transition-shadow"
+                        className="fixed bottom-20 right-8 z-[100] md:bottom-8 md:z-50 w-14 h-14 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/30 flex items-center justify-center hover:shadow-cyan-500/50 transition-shadow"
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         whileHover={{ scale: 1.1, y: -3 }}
                         whileTap={{ scale: 0.95 }}
