@@ -2006,7 +2006,7 @@ const App = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
-                        className="fixed bottom-20 right-8 z-[100] md:bottom-8 md:z-50 w-14 h-14 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/30 flex items-center justify-center hover:shadow-cyan-500/50 transition-shadow"
+                        className="fixed bottom-5 right-5 z-[100] md:bottom-8 md:right-8 md:z-50 w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500/90 to-blue-600/90 backdrop-blur-md border border-white/20 text-white shadow-lg shadow-cyan-500/20 flex items-center justify-center hover:shadow-cyan-500/40 hover:scale-105 transition-all"
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         whileHover={{ scale: 1.1, y: -3 }}
                         whileTap={{ scale: 0.95 }}
