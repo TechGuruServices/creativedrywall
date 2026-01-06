@@ -37,9 +37,19 @@ export async function onRequestPost({ request, env }) {
             }), { status: 503, headers: corsHeaders });
         }
 
-        const { message, history = [] } = await request.json();
+        let body;
+        try {
+            body = await request.json();
+        } catch (e) {
+            return new Response(JSON.stringify({
+                success: false,
+                message: "Invalid JSON body"
+            }), { status: 400, headers: corsHeaders });
+        }
 
-        if (!message || typeof message !== 'string') {
+        const { message, history = [] } = body;
+
+        if (!message || typeof message !== 'string' || !message.trim()) {
             return new Response(JSON.stringify({
                 success: false,
                 message: "Message is required"
@@ -49,18 +59,22 @@ export async function onRequestPost({ request, env }) {
         // Build conversation contents for Gemini
         const contents = [];
 
-        // Add conversation history
-        for (const msg of history) {
-            contents.push({
-                role: msg.role === 'user' ? 'user' : 'model',
-                parts: [{ text: msg.content }]
-            });
+        // Add conversation history - strictly filter valid messages only
+        if (Array.isArray(history)) {
+            for (const msg of history) {
+                if (msg.content && typeof msg.content === 'string' && msg.content.trim()) {
+                    contents.push({
+                        role: msg.role === 'user' ? 'user' : 'model',
+                        parts: [{ text: msg.content.trim() }]
+                    });
+                }
+            }
         }
 
         // Add current user message
         contents.push({
             role: 'user',
-            parts: [{ text: message }]
+            parts: [{ text: message.trim() }]
         });
 
         // Call Gemini API
@@ -92,11 +106,21 @@ export async function onRequestPost({ request, env }) {
 
         if (!geminiResponse.ok) {
             const errorData = await geminiResponse.json();
-            console.error("Gemini API error:", errorData);
+            console.error("Gemini API error:", JSON.stringify(errorData, null, 2));
+
+            // Map common errors to user-friendly messages
+            let userMessage = "AI service temporarily unavailable. Please try again later.";
+            if (geminiResponse.status === 400) userMessage = "Invalid request format.";
+            if (geminiResponse.status === 403) userMessage = "Access denied (API Key or Region).";
+            if (geminiResponse.status === 429) userMessage = "Too many requests. Please slow down.";
+
             return new Response(JSON.stringify({
                 success: false,
-                message: errorData.error?.message || "AI service temporarily unavailable. Please try again later.",
-                details: errorData
+                message: userMessage,
+                debug: {
+                    status: geminiResponse.status,
+                    error: errorData.error?.message
+                }
             }), { status: 502, headers: corsHeaders });
         }
 
@@ -112,7 +136,8 @@ export async function onRequestPost({ request, env }) {
         console.error("Chat API error:", error);
         return new Response(JSON.stringify({
             success: false,
-            message: "An unexpected error occurred. Please try again."
+            message: "An unexpected error occurred. Please try again.",
+            debug: error.message
         }), { status: 500, headers: corsHeaders });
     }
 }
