@@ -308,6 +308,7 @@ export default function ChatWidget() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={isOpen ? "Close chat" : "Open chat (Ctrl+Shift+C)"}
+                data-state={isOpen ? 'open' : 'closed'}
             >
                 <AnimatePresence mode="wait">
                     {isOpen ? (
