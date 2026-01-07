@@ -14,9 +14,12 @@ const App = () => {
         projectType: 'residential',
         propertyType: 'new-construction',
         timeline: 'asap',
+        squareFootage: 'unknown',
+        urgency: 'flexible',
         message: '',
         consultationDate: '',
-        consultationTime: ''
+        consultationTime: '',
+        website: '' // Honeypot field - should remain empty
     });
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -141,9 +144,12 @@ const App = () => {
                     projectType: 'residential',
                     propertyType: 'new-construction',
                     timeline: 'asap',
+                    squareFootage: 'unknown',
+                    urgency: 'flexible',
                     message: '',
                     consultationDate: '',
-                    consultationTime: ''
+                    consultationTime: '',
+                    website: ''
                 });
             } else {
                 throw new Error(data.message || 'Submission failed');
@@ -1219,6 +1225,29 @@ const App = () => {
                                             </motion.li>
                                         </ul>
                                     </motion.div>
+                                    <motion.div
+                                        className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 1.2 }}
+                                    >
+                                        <motion.button
+                                            onClick={() => setSubmitSuccess(false)}
+                                            className="px-6 py-3 rounded-xl font-medium border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 transition-all"
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
+                                            Submit Another Request
+                                        </motion.button>
+                                        <motion.a
+                                            href="#home"
+                                            className="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-blue-700 hover:to-cyan-600 transition-all text-center"
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                        >
+                                            Back to Home
+                                        </motion.a>
+                                    </motion.div>
                                 </motion.div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -1392,6 +1421,80 @@ const App = () => {
                                         </motion.div>
                                     </div>
 
+                                    {/* Square Footage and Urgency Row */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        <motion.div
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: 0.65 }}
+                                        >
+                                            <label htmlFor="squareFootage" className="block text-lg font-medium text-gray-300 mb-3">
+                                                Estimated Square Footage
+                                            </label>
+                                            <div className="relative">
+                                                <select
+                                                    id="squareFootage"
+                                                    name="squareFootage"
+                                                    value={formData.squareFootage}
+                                                    onChange={handleChange}
+                                                    className="w-full bg-gray-800/40 border border-gray-700/50 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-lg appearance-none"
+                                                >
+                                                    <option value="unknown">Not Sure</option>
+                                                    <option value="under-500">Under 500 sq ft</option>
+                                                    <option value="500-1000">500 - 1,000 sq ft</option>
+                                                    <option value="1000-2000">1,000 - 2,000 sq ft</option>
+                                                    <option value="2000-5000">2,000 - 5,000 sq ft</option>
+                                                    <option value="5000-plus">5,000+ sq ft</option>
+                                                </select>
+                                                <svg className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </motion.div>
+                                        <motion.div
+                                            initial={{ opacity: 0, x: 20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: 0.68 }}
+                                        >
+                                            <label htmlFor="urgency" className="block text-lg font-medium text-gray-300 mb-3">
+                                                How Urgent?
+                                            </label>
+                                            <div className="relative">
+                                                <select
+                                                    id="urgency"
+                                                    name="urgency"
+                                                    value={formData.urgency}
+                                                    onChange={handleChange}
+                                                    className="w-full bg-gray-800/40 border border-gray-700/50 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-lg appearance-none"
+                                                >
+                                                    <option value="flexible">Flexible - No Rush</option>
+                                                    <option value="within-month">Within 1 Month</option>
+                                                    <option value="within-2-weeks">Within 2 Weeks</option>
+                                                    <option value="emergency">Emergency - ASAP</option>
+                                                </select>
+                                                <svg className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </motion.div>
+                                    </div>
+
+                                    {/* Honeypot field - hidden from users, traps bots */}
+                                    <div style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+                                        <label htmlFor="website">Website</label>
+                                        <input
+                                            type="text"
+                                            id="website"
+                                            name="website"
+                                            value={formData.website}
+                                            onChange={handleChange}
+                                            tabIndex={-1}
+                                            autoComplete="off"
+                                        />
+                                    </div>
+
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
@@ -1408,7 +1511,7 @@ const App = () => {
                                             onChange={handleChange}
                                             rows={5}
                                             className="w-full bg-gray-800/40 border border-gray-700/50 rounded-2xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-lg resize-none"
-                                            placeholder="Tell us about your project, square footage, special requirements, or any other details..."
+                                            placeholder="Tell us about your project, special requirements, or any other details..."
                                         />
                                     </motion.div>
 

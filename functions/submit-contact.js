@@ -8,9 +8,21 @@
 export async function onRequestPost({ request, env }) {
     try {
         const formData = await request.json();
-        const { name, email, phone, message, projectType } = formData;
+        const { name, email, phone, message, projectType, propertyType, timeline, squareFootage, urgency, website } = formData;
 
-        // 1. Basic Validation
+        // 1. Honeypot check - if filled, silently reject (bot detected)
+        if (website) {
+            // Return success to fool the bot, but don't actually submit
+            return new Response(JSON.stringify({
+                success: true,
+                message: "Thank you! Your message has been received."
+            }), {
+                status: 200,
+                headers: { "Content-Type": "application/json" }
+            });
+        }
+
+        // 2. Basic Validation
         if (!name || !email || !message) {
             return new Response(JSON.stringify({
                 success: false,
@@ -21,14 +33,14 @@ export async function onRequestPost({ request, env }) {
             });
         }
 
-        // 2. Check for Formspark configuration
+        // 3. Check for Formspark configuration
         const formId = env.FORMSPARK_FORM_ID;
         if (!formId) {
             console.error("FORMSPARK_FORM_ID environment variable not configured");
             throw new Error("Server configuration error: Missing Formspark form ID.");
         }
 
-        // 3. Submit to Formspark
+        // 4. Submit to Formspark with all fields
         const response = await fetch(`https://submit-form.com/${formId}`, {
             method: 'POST',
             headers: {
@@ -40,8 +52,12 @@ export async function onRequestPost({ request, env }) {
                 email,
                 phone: phone || 'Not provided',
                 projectType: projectType || 'Not specified',
+                propertyType: propertyType || 'Not specified',
+                timeline: timeline || 'Not specified',
+                squareFootage: squareFootage || 'Unknown',
+                urgency: urgency || 'Flexible',
                 message,
-                _subject: `New Inquiry from ${name}`,
+                _subject: `New Inquiry from ${name} - ${urgency === 'emergency' ? '🚨 URGENT' : projectType}`,
             })
         });
 
