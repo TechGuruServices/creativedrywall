@@ -7,6 +7,10 @@ export async function onRequestPost({ request, env }) {
         const formData = await request.json();
         const { name, email, phone, message, projectType } = formData;
 
+        // DEBUG: Log available keys (DO NOT log values for security)
+        console.log("DEBUG: Available Env Keys:", Object.keys(env));
+        console.log("DEBUG: Has RESEND_API_KEY:", !!env.RESEND_API_KEY);
+
         // 1. Basic Validation
         if (!name || !email || !message) {
             return new Response(JSON.stringify({ success: false, message: "Missing required fields" }), {
