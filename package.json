@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "local": "npx wrangler pages dev . --compatibility-date=2024-01-01",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
