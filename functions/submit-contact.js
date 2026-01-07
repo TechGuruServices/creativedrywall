@@ -34,7 +34,8 @@ export async function onRequestPost({ request, env }) {
         }
 
         // 3. Check for Formspark configuration
-        const formId = env.FORMSPARK_FORM_ID;
+        // const formId = env.FORMSPARK_FORM_ID;
+        const formId = "rd9RKoD1l"; // DEBUG: Hardcoded to test
         if (!formId) {
             console.error("FORMSPARK_FORM_ID environment variable not configured");
             throw new Error("Server configuration error: Missing Formspark form ID.");
