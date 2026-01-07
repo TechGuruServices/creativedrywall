@@ -1,0 +1,13 @@
+# Creative Drywall AI Assistant - Cloudflare Workers Configuration
+name = "creative-drywall-ai"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+# AI Binding - Workers AI
+[ai]
+binding = "AI"
+
+# Environment Variables
+[vars]
+ENVIRONMENT = "production"

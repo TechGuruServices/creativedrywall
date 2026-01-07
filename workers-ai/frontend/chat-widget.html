@@ -1,0 +1,650 @@
+<!--
+  Creative Drywall AI Chat Widget
+  Frontend Integration for Cloudflare Workers AI
+  
+  Copy this entire snippet into your website HTML
+  Works with any website builder (HTML/CSS only)
+-->
+
+<!-- Chat Widget Container -->
+<div id="cd-chat-widget" class="cd-chat-widget">
+    <!-- Toggle Button -->
+    <button id="cd-chat-toggle" class="cd-chat-toggle" aria-label="Open chat">
+        <svg class="cd-chat-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+        <svg class="cd-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+        <span class="cd-chat-badge">1</span>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="cd-chat-window" class="cd-chat-window">
+        <!-- Header -->
+        <div class="cd-chat-header">
+            <div class="cd-chat-header-info">
+                <div class="cd-chat-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                </div>
+                <div class="cd-chat-header-text">
+                    <h3>Creative Drywall</h3>
+                    <span>Family-owned since 1976</span>
+                </div>
+            </div>
+            <button id="cd-chat-minimize" class="cd-chat-minimize" aria-label="Minimize chat">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Messages Container -->
+        <div id="cd-chat-messages" class="cd-chat-messages">
+            <!-- Welcome message inserted by JS -->
+        </div>
+
+        <!-- Quick Replies -->
+        <div id="cd-chat-quick-replies" class="cd-chat-quick-replies">
+            <button class="cd-quick-reply" data-message="I need a free quote">Get Free Quote</button>
+            <button class="cd-quick-reply" data-message="What services do you offer?">Our Services</button>
+            <button class="cd-quick-reply" data-message="I have an emergency repair">Emergency</button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="cd-chat-input-area">
+            <textarea id="cd-chat-input" class="cd-chat-input" placeholder="Ask about drywall services..." rows="1"
+                maxlength="2000"></textarea>
+            <button id="cd-chat-send" class="cd-chat-send" aria-label="Send message">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="cd-chat-footer">
+            <span>📞 (406) 239-0850</span>
+            <span>•</span>
+            <span>Missoula, MT</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Creative Drywall Chat Widget Styles */
+    :root {
+        --cd-primary: #1e3a5f;
+        --cd-primary-light: #2d5a8a;
+        --cd-secondary: #c9a227;
+        --cd-bg: #ffffff;
+        --cd-bg-dark: #f5f7fa;
+        --cd-text: #1a1a2e;
+        --cd-text-muted: #64748b;
+        --cd-border: #e2e8f0;
+        --cd-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        --cd-radius: 16px;
+        --cd-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cd-chat-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 99999;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    }
+
+    /* Toggle Button */
+    .cd-chat-toggle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--cd-primary) 0%, var(--cd-primary-light) 100%);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--cd-shadow);
+        transition: var(--cd-transition);
+        position: relative;
+    }
+
+    .cd-chat-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 15px 50px rgba(30, 58, 95, 0.3);
+    }
+
+    .cd-chat-toggle svg {
+        width: 28px;
+        height: 28px;
+        color: white;
+        transition: var(--cd-transition);
+    }
+
+    .cd-chat-icon-close {
+        display: none;
+    }
+
+    .cd-chat-widget.open .cd-chat-icon-open {
+        display: none;
+    }
+
+    .cd-chat-widget.open .cd-chat-icon-close {
+        display: block;
+    }
+
+    .cd-chat-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 22px;
+        height: 22px;
+        background: var(--cd-secondary);
+        border-radius: 50%;
+        color: white;
+        font-size: 12px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: cd-pulse 2s infinite;
+    }
+
+    .cd-chat-widget.open .cd-chat-badge,
+    .cd-chat-badge.hidden {
+        display: none;
+    }
+
+    @keyframes cd-pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    /* Chat Window */
+    .cd-chat-window {
+        position: absolute;
+        bottom: 75px;
+        right: 0;
+        width: 380px;
+        max-width: calc(100vw - 40px);
+        height: 550px;
+        max-height: calc(100vh - 120px);
+        background: var(--cd-bg);
+        border-radius: var(--cd-radius);
+        box-shadow: var(--cd-shadow);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        transform: translateY(20px) scale(0.95);
+        opacity: 0;
+        transition: var(--cd-transition);
+    }
+
+    .cd-chat-widget.open .cd-chat-window {
+        display: flex;
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    /* Header */
+    .cd-chat-header {
+        background: linear-gradient(135deg, var(--cd-primary) 0%, var(--cd-primary-light) 100%);
+        color: white;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .cd-chat-header-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .cd-chat-avatar {
+        width: 44px;
+        height: 44px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cd-chat-avatar svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .cd-chat-header-text h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .cd-chat-header-text span {
+        font-size: 12px;
+        opacity: 0.9;
+    }
+
+    .cd-chat-minimize {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--cd-transition);
+    }
+
+    .cd-chat-minimize:hover {
+        background: rgba(255, 255, 255, 0.25);
+    }
+
+    .cd-chat-minimize svg {
+        width: 18px;
+        height: 18px;
+        color: white;
+    }
+
+    /* Messages */
+    .cd-chat-messages {
+        flex: 1;
+        padding: 16px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background: var(--cd-bg-dark);
+    }
+
+    .cd-message {
+        max-width: 85%;
+        padding: 12px 16px;
+        border-radius: 16px;
+        line-height: 1.5;
+        font-size: 14px;
+        animation: cd-fadeIn 0.3s ease;
+    }
+
+    @keyframes cd-fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .cd-message.user {
+        background: linear-gradient(135deg, var(--cd-primary) 0%, var(--cd-primary-light) 100%);
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+    }
+
+    .cd-message.assistant {
+        background: white;
+        color: var(--cd-text);
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .cd-message.assistant strong {
+        color: var(--cd-primary);
+    }
+
+    .cd-message-time {
+        font-size: 11px;
+        color: var(--cd-text-muted);
+        margin-top: 4px;
+        display: block;
+    }
+
+    .cd-typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 16px;
+        align-self: flex-start;
+    }
+
+    .cd-typing-indicator span {
+        width: 8px;
+        height: 8px;
+        background: var(--cd-primary);
+        border-radius: 50%;
+        animation: cd-bounce 1.4s infinite ease-in-out both;
+    }
+
+    .cd-typing-indicator span:nth-child(1) {
+        animation-delay: -0.32s;
+    }
+
+    .cd-typing-indicator span:nth-child(2) {
+        animation-delay: -0.16s;
+    }
+
+    @keyframes cd-bounce {
+
+        0%,
+        80%,
+        100% {
+            transform: scale(0);
+        }
+
+        40% {
+            transform: scale(1);
+        }
+    }
+
+    /* Quick Replies */
+    .cd-chat-quick-replies {
+        padding: 8px 16px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        background: var(--cd-bg-dark);
+        border-top: 1px solid var(--cd-border);
+    }
+
+    .cd-quick-reply {
+        padding: 8px 14px;
+        background: white;
+        border: 1px solid var(--cd-border);
+        border-radius: 20px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: var(--cd-transition);
+        white-space: nowrap;
+    }
+
+    .cd-quick-reply:hover {
+        background: var(--cd-primary);
+        border-color: var(--cd-primary);
+        color: white;
+    }
+
+    /* Input Area */
+    .cd-chat-input-area {
+        padding: 12px 16px;
+        background: white;
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+        border-top: 1px solid var(--cd-border);
+    }
+
+    .cd-chat-input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 1px solid var(--cd-border);
+        border-radius: 24px;
+        resize: none;
+        font-size: 14px;
+        font-family: inherit;
+        max-height: 100px;
+        outline: none;
+        transition: var(--cd-transition);
+    }
+
+    .cd-chat-input:focus {
+        border-color: var(--cd-primary);
+        box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
+    }
+
+    .cd-chat-send {
+        width: 44px;
+        height: 44px;
+        background: linear-gradient(135deg, var(--cd-secondary) 0%, #d4a82a 100%);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--cd-transition);
+        flex-shrink: 0;
+    }
+
+    .cd-chat-send:hover {
+        transform: scale(1.05);
+    }
+
+    .cd-chat-send:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .cd-chat-send svg {
+        width: 20px;
+        height: 20px;
+        color: white;
+    }
+
+    /* Footer */
+    .cd-chat-footer {
+        padding: 10px 16px;
+        background: var(--cd-bg-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--cd-text-muted);
+        border-top: 1px solid var(--cd-border);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 480px) {
+        .cd-chat-widget {
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .cd-chat-window {
+            width: calc(100vw - 20px);
+            height: calc(100vh - 100px);
+            bottom: 70px;
+            right: -5px;
+        }
+
+        .cd-chat-toggle {
+            width: 54px;
+            height: 54px;
+        }
+    }
+</style>
+
+<script>
+    (function () {
+        'use strict';
+
+        // Configuration - UPDATE THIS URL AFTER DEPLOYMENT
+        const API_URL = 'https://creative-drywall-ai.lucas-a13.workers.dev';
+
+        // DOM Elements
+        const widget = document.getElementById('cd-chat-widget');
+        const toggle = document.getElementById('cd-chat-toggle');
+        const minimize = document.getElementById('cd-chat-minimize');
+        const messages = document.getElementById('cd-chat-messages');
+        const input = document.getElementById('cd-chat-input');
+        const sendBtn = document.getElementById('cd-chat-send');
+        const badge = document.querySelector('.cd-chat-badge');
+        const quickReplies = document.querySelectorAll('.cd-quick-reply');
+
+        // State
+        let isOpen = false;
+        let isLoading = false;
+        let conversationHistory = [];
+
+        // Initialize
+        function init() {
+            toggle.addEventListener('click', toggleChat);
+            minimize.addEventListener('click', toggleChat);
+            sendBtn.addEventListener('click', sendMessage);
+            input.addEventListener('keydown', handleKeyDown);
+            input.addEventListener('input', autoResize);
+
+            quickReplies.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const msg = btn.getAttribute('data-message');
+                    if (msg) {
+                        input.value = msg;
+                        sendMessage();
+                    }
+                });
+            });
+
+            // Show welcome message after delay
+            setTimeout(showWelcome, 1000);
+        }
+
+        function toggleChat() {
+            isOpen = !isOpen;
+            widget.classList.toggle('open', isOpen);
+            if (isOpen) {
+                badge.classList.add('hidden');
+                input.focus();
+            }
+        }
+
+        function showWelcome() {
+            addMessage('assistant', `👋 Welcome to Creative Drywall! I'm here to help with your drywall needs.
+
+The Thompson family has served Montana for **49+ years** with our **100% satisfaction guarantee**.
+
+How can I assist you today?`);
+        }
+
+        function addMessage(role, content) {
+            const div = document.createElement('div');
+            div.className = `cd-message ${role}`;
+
+            // Simple markdown-like formatting
+            const formatted = content
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>')
+                .replace(/📞|📧|📍|🚨|👋/g, match => `<span style="font-size:1.2em">${match}</span>`);
+
+            div.innerHTML = formatted;
+
+            const time = document.createElement('span');
+            time.className = 'cd-message-time';
+            time.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            div.appendChild(time);
+
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+
+            conversationHistory.push({ role, content });
+        }
+
+        function showTyping() {
+            const div = document.createElement('div');
+            div.className = 'cd-typing-indicator';
+            div.id = 'cd-typing';
+            div.innerHTML = '<span></span><span></span><span></span>';
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function hideTyping() {
+            const typing = document.getElementById('cd-typing');
+            if (typing) typing.remove();
+        }
+
+        async function sendMessage() {
+            const text = input.value.trim();
+            if (!text || isLoading) return;
+
+            addMessage('user', text);
+            input.value = '';
+            input.style.height = 'auto';
+            isLoading = true;
+            sendBtn.disabled = true;
+            showTyping();
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: text,
+                        history: conversationHistory.slice(-10).map(m => ({
+                            role: m.role,
+                            content: m.content
+                        }))
+                    })
+                });
+
+                const data = await response.json();
+                hideTyping();
+
+                if (data.success && data.message) {
+                    addMessage('assistant', data.message);
+                } else {
+                    addMessage('assistant', getFallback());
+                }
+            } catch (error) {
+                console.error('Chat error:', error);
+                hideTyping();
+                addMessage('assistant', getFallback());
+            } finally {
+                isLoading = false;
+                sendBtn.disabled = false;
+            }
+        }
+
+        function getFallback() {
+            return `I'm having trouble connecting right now. Please contact us directly:
+
+📞 **(406) 239-0850**
+📧 info@creativedrywall.buzz
+📍 6785 Prairie Schooner Lane, Missoula, MT 59808
+
+The Thompson family is ready to help!`;
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function autoResize() {
+            input.style.height = 'auto';
+            input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+        }
+
+        // Initialize when DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+</script>
