@@ -32,8 +32,8 @@ const App = () => {
     const [activeSection, setActiveSection] = useState('home');
     const [isDarkMode, setIsDarkMode] = useState(true);
 
-    // Hero background image (royalty-free construction image)
-    const heroBackgroundImage = "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1920&q=80";
+    // Hero background image
+    const heroBackgroundImage = "/hero-new.jpg";
 
     useEffect(() => {
         const handleScroll = () => {
@@ -385,9 +385,11 @@ const App = () => {
                 {/* Hero Background with Image */}
                 <div className="absolute inset-0">
                     {/* Background Image */}
-                    <div
-                        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-                        style={{ backgroundImage: `url(${heroBackgroundImage})` }}
+                    <img
+                        src={heroBackgroundImage}
+                        alt="Modern Home Exterior"
+                        className="absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
                     />
                     {/* Premium Overlay */}
                     <div className="absolute inset-0 hero-overlay"></div>
