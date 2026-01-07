@@ -3,8 +3,7 @@ import { Phone, MapPin, ShieldCheck, Hammer, Users, Star, Calendar, CheckCircle,
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import QuoteCalculator from './components/QuoteCalculator';
 
-// Lazy load ChatWidget for better initial load performance
-const ChatWidget = lazy(() => import('./components/ChatWidget'));
+
 
 const App = () => {
     const [formData, setFormData] = useState({
@@ -374,11 +373,7 @@ const App = () => {
                 </div>
             </motion.nav>
 
-            {/* AI Chat Widget */}
-            {/* AI Chat Widget - Lazy Loaded */}
-            <Suspense fallback={null}>
-                <ChatWidget />
-            </Suspense>
+
 
             {/* Premium Hero Section */}
             <section id="home" className="pt-40 md:pt-48 lg:pt-56 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
