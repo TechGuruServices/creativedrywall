@@ -64,7 +64,8 @@ export async function onRequestPost({ request, env }) {
         if (!response.ok) {
             const errorText = await response.text();
             console.error("Formspark API Error:", errorText);
-            throw new Error("Failed to submit form. Please try again.");
+            // Return the actual error to the client for debugging
+            throw new Error(`Form connection failed: ${response.status} ${errorText || response.statusText}`);
         }
 
         return new Response(JSON.stringify({
