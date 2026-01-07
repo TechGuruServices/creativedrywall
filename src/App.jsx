@@ -1694,25 +1694,21 @@ const App = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid md:grid-cols-4 gap-12">
                         <div className="md:col-span-2">
-                            <div className="flex items-center space-x-4 mb-8">
+                            <div className="flex justify-center w-full mb-8">
                                 {/* Updated Company Logo in Footer */}
                                 <motion.div
-                                    className="flex items-center justify-center px-3 py-2 rounded-2xl bg-white/5 border border-white/10 shadow-none"
+                                    className="footer-logo flex items-center justify-center my-[10px]"
+                                    style={{ border: 'none !important', background: 'transparent' }}
                                     whileHover={{ scale: 1.05, rotate: 2 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
                                     <img
                                         src="/logo.png"
                                         alt="Creative Drywall Logo"
-                                        className="h-14 w-auto object-contain"
+                                        className="h-[120px] w-auto object-contain max-w-full"
+                                        style={{ border: 'none' }}
                                     />
                                 </motion.div>
-                                <div className="flex flex-col items-start">
-                                    <span className="text-3xl font-bold bg-gradient-to-r from-blue-300 to-cyan-200 bg-clip-text text-transparent">
-                                        CREATIVE DRYWALL
-                                    </span>
-                                    <span className="text-sm text-cyan-400/80 tracking-wider">SINCE 1976</span>
-                                </div>
                             </div>
                             <p className="text-gray-400 mb-8 text-lg max-w-2xl">
                                 Montana's premier family-owned drywall company, serving the Treasure State
