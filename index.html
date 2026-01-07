@@ -503,36 +503,38 @@
     }
 
     .cd-chat-toggle {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--cd-primary) 0%, var(--cd-primary-light) 100%);
-      border: 4px solid white;
-      /* Bold, clean border instead of glow */
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.1);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: var(--cd-shadow);
-      transition: var(--cd-transition);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
       margin-left: auto;
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
     }
 
     .cd-chat-toggle:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--cd-shadow-hover);
+      transform: translateY(-3px) scale(1.05);
+      border-color: rgba(34, 211, 238, 0.5);
+      box-shadow: 0 8px 32px rgba(6, 182, 212, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     .cd-chat-toggle:active {
-      transform: scale(0.96);
+      transform: scale(0.95);
     }
 
     .cd-chat-toggle svg {
       width: 28px;
       height: 28px;
-      color: white;
+      color: #22d3ee;
       transition: var(--cd-transition);
       position: absolute;
     }
@@ -555,8 +557,8 @@
 
     .cd-chat-badge {
       position: absolute;
-      top: 2px;
-      right: 2px;
+      top: -4px;
+      right: -4px;
       width: 18px;
       height: 18px;
       background: var(--cd-secondary);
