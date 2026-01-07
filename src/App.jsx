@@ -203,9 +203,9 @@ const App = () => {
                             whileHover={{ scale: 1.03 }}
                             transition={{ type: "spring", stiffness: 300 }}
                         >
-                            <div className="bg-white/90 backdrop-blur-xl rounded-2xl px-4 py-3 shadow-lg shadow-cyan-500/10 border border-white/40"
+                            <div className="bg-white/5 rounded-2xl px-4 py-3 shadow-none border border-white/10"
                                 style={{
-                                    boxShadow: '0 8px 32px rgba(31, 38, 135, 0.15)',
+                                    boxShadow: 'none',
                                 }}
                             >
                                 <img
