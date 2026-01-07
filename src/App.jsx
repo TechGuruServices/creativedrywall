@@ -1697,7 +1697,7 @@ const App = () => {
                             <div className="flex items-center space-x-4 mb-8">
                                 {/* Updated Company Logo in Footer */}
                                 <motion.div
-                                    className="flex items-center justify-center px-3 py-2 rounded-2xl bg-white border border-white/10 backdrop-blur-md shadow-lg shadow-cyan-500/10"
+                                    className="flex items-center justify-center px-3 py-2 rounded-2xl bg-white/5 border border-white/10 shadow-none"
                                     whileHover={{ scale: 1.05, rotate: 2 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
