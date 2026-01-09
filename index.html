@@ -1045,22 +1045,28 @@
       }
 
       function showWelcome() {
-        addMessage('assistant', `👋 Welcome to Creative Drywall! I'm here to help with your drywall needs.
+        addMessage('assistant', `👋 Hi there from Creative Drywall.
+✅ **49+ years** serving Montana families
+✅ **All Phase Drywall** from start to finish
+✨ *How can I help today?*
+• New drywall installation
+• Repairs & texturing
+• Free estimates & consultations
 
-The Thompson family has served Montana for **49+ years** with our **100% satisfaction guarantee**.
-
-How can I assist you today?`);
+_Tap a button below or type your request!_`);
       }
 
       function addMessage(role, content) {
         const div = document.createElement('div');
         div.className = `cd-message ${role}`;
 
-        // Simple markdown-like formatting
+        // Enhanced markdown-like formatting
         const formatted = content
           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/_(.*?)_/g, '<em>$1</em>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
           .replace(/\n/g, '<br>')
-          .replace(/📞|📧|📍|🚨|👋/g, match => `<span style="font-size:1.2em">${match}</span>`);
+          .replace(/👋|✅|✨|📞|📧|📍|🚨/g, match => `<span style="font-size:1.2em">${match}</span>`);
 
         div.innerHTML = formatted;
 
