@@ -1060,13 +1060,23 @@ _Tap a button below or type your request!_`);
         const div = document.createElement('div');
         div.className = `cd-message ${role}`;
 
-        // Enhanced markdown-like formatting
+        // Enhanced markdown-like formatting with Premium SVG Replacements
+        const emojiMap = {
+          '👋': '<svg viewBox="0 0 24 24" fill="none" class="cd-chat-icon" stroke="#f5c43d" stroke-width="2" style="width:1.2em;height:1.2em;vertical-align:text-bottom"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>',
+          '✅': '<svg viewBox="0 0 24 24" fill="none" class="cd-chat-icon" stroke="#22d3ee" stroke-width="2.5" style="width:1.1em;height:1.1em;vertical-align:text-bottom"><polyline points="20 6 9 17 4 12"/></svg>',
+          '✨': '<svg viewBox="0 0 24 24" fill="#f5c43d" class="cd-chat-icon" stroke="none" style="width:1.1em;height:1.1em;vertical-align:text-bottom"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+          '📞': '<svg viewBox="0 0 24 24" fill="none" class="cd-chat-icon" stroke="#22d3ee" stroke-width="2" style="width:1.1em;height:1.1em;vertical-align:text-bottom"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+          '📧': '<svg viewBox="0 0 24 24" fill="none" class="cd-chat-icon" stroke="#22d3ee" stroke-width="2" style="width:1.1em;height:1.1em;vertical-align:text-bottom"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
+          '📍': '<svg viewBox="0 0 24 24" fill="none" class="cd-chat-icon" stroke="#22d3ee" stroke-width="2" style="width:1.1em;height:1.1em;vertical-align:text-bottom"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+          '🚨': '<svg viewBox="0 0 24 24" fill="none" class="cd-chat-icon" stroke="#f5c43d" stroke-width="2" style="width:1.1em;height:1.1em;vertical-align:text-bottom"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'
+        };
+
         const formatted = content
           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
           .replace(/_(.*?)_/g, '<em>$1</em>')
           .replace(/\*(.*?)\*/g, '<em>$1</em>')
           .replace(/\n/g, '<br>')
-          .replace(/👋|✅|✨|📞|📧|📍|🚨/g, match => `<span style="font-size:1.2em">${match}</span>`);
+          .replace(/👋|✅|✨|📞|📧|📍|🚨/g, match => emojiMap[match] || match);
 
         div.innerHTML = formatted;
 
