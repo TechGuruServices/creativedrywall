@@ -402,16 +402,17 @@
   <!-- Creative Drywall AI Chat Widget -->
   <div id="cd-chat-widget" class="cd-chat-widget">
     <!-- Toggle Button -->
-    <button id="cd-chat-toggle" class="cd-chat-toggle" aria-label="Open chat">
-      <svg class="cd-chat-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-      </svg>
-      <svg class="cd-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
-      </svg>
-      <span class="cd-chat-badge">1</span>
-    </button>
+    <div class="cd-chat-float-wrapper">
+      <button id="cd-chat-toggle" class="cd-chat-toggle" aria-label="Open chat">
+        <svg class="cd-chat-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+        <svg class="cd-chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
 
     <!-- Chat Window -->
     <div id="cd-chat-window" class="cd-chat-window">
@@ -502,6 +503,25 @@
       box-sizing: border-box;
     }
 
+    /* Floating Animation */
+    @keyframes cd-float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .cd-chat-float-wrapper {
+      animation: cd-float 3s ease-in-out infinite;
+      display: flex;
+      justify-content: flex-end;
+    }
+
     .cd-chat-toggle {
       width: 56px;
       height: 56px;
@@ -513,7 +533,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       position: relative;
       overflow: hidden;
       margin-left: auto;
@@ -522,9 +542,9 @@
     }
 
     .cd-chat-toggle:hover {
-      transform: translateY(-3px) scale(1.05);
+      transform: scale(1.1);
       border-color: rgba(34, 211, 238, 0.5);
-      box-shadow: 0 8px 32px rgba(6, 182, 212, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 32px rgba(6, 182, 212, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     .cd-chat-toggle:active {
@@ -955,7 +975,6 @@
       const messages = document.getElementById('cd-chat-messages');
       const input = document.getElementById('cd-chat-input');
       const sendBtn = document.getElementById('cd-chat-send');
-      const badge = document.querySelector('.cd-chat-badge');
       const quickReplies = document.querySelectorAll('.cd-quick-reply');
 
       // State
@@ -989,7 +1008,6 @@
         isOpen = !isOpen;
         widget.classList.toggle('open', isOpen);
         if (isOpen) {
-          badge.classList.add('hidden');
           input.focus();
         }
       }

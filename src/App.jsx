@@ -1700,7 +1700,7 @@ const App = () => {
                                     <img
                                         src="/logo.png"
                                         alt="Creative Drywall Logo"
-                                        className="h-[120px] w-auto object-contain max-w-full"
+                                        className="h-[180px] w-auto object-contain max-w-full"
                                         style={{ border: 'none' }}
                                     />
                                 </motion.div>
