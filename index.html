@@ -446,7 +446,6 @@
       <div id="cd-chat-quick-replies" class="cd-chat-quick-replies">
         <button class="cd-quick-reply" data-message="I need a free quote">Get Free Quote</button>
         <button class="cd-quick-reply" data-message="What services do you offer?">Our Services</button>
-        <button class="cd-quick-reply" data-message="I have an emergency repair">Emergency</button>
       </div>
 
       <!-- Input Area -->
@@ -454,18 +453,29 @@
         <textarea id="cd-chat-input" class="cd-chat-input" placeholder="Ask about drywall services..." rows="1"
           maxlength="2000"></textarea>
         <button id="cd-chat-send" class="cd-chat-send" aria-label="Send message">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="22" y1="2" x2="11" y2="13" />
-            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
           </svg>
         </button>
       </div>
 
       <!-- Footer -->
+      <!-- Footer -->
       <div class="cd-chat-footer">
-        <span>📞 (406) 239-0850</span>
-        <span>•</span>
-        <span>Missoula, MT</span>
+        <a href="tel:+14062390850" class="cd-footer-cta cd-cta-call">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          CALL US
+        </a>
+        <a href="mailto:info@creativedrywall.buzz" class="cd-footer-cta cd-cta-email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+            <polyline points="22,6 12,13 2,6" />
+          </svg>
+          EMAIL US
+        </a>
       </div>
     </div>
   </div>
@@ -846,7 +856,8 @@
 
     .cd-chat-input {
       flex: 1;
-      padding: 14px 20px;
+      height: 48px;
+      padding: 12px 16px;
       background: var(--cd-surface);
       border: 1px solid transparent;
       /* No border for clean look */
@@ -869,58 +880,79 @@
     }
 
     .cd-chat-input::placeholder {
-      color: #94a3b8;
+      color: #6b7280;
+      font-size: 14px;
     }
 
     .cd-chat-send {
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, var(--cd-primary) 0%, var(--cd-primary-light) 100%);
+      background: transparent;
       border: none;
-      border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--cd-transition);
+      transition: color 0.15s ease;
       flex-shrink: 0;
-      color: white;
-      box-shadow: 0 4px 10px rgba(30, 58, 95, 0.2);
+      color: #0066cc;
+      box-shadow: none;
     }
 
     .cd-chat-send:not(:disabled):hover {
       transform: scale(1.1);
-      box-shadow: 0 6px 15px rgba(30, 58, 95, 0.3);
+      color: #0055aa;
     }
 
     .cd-chat-send:disabled {
       opacity: 0.6;
       cursor: not-allowed;
-      box-shadow: none;
-      background: #cbd5e1;
+      background: transparent;
     }
 
     .cd-chat-send svg {
-      width: 20px;
-      height: 20px;
-      margin-left: -2px;
-      /* Visual center adjustment */
+      width: 24px;
+      height: 24px;
     }
 
     /* Footer */
     .cd-chat-footer {
-      padding: 12px;
+      padding: 16px;
       background: var(--cd-surface);
+      display: flex;
+      gap: 12px;
+      border-top: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .cd-footer-cta {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-size: 11px;
+      height: 48px;
+      border-radius: 8px;
+      color: white;
+      font-size: 14px;
       font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--cd-text-muted);
-      border-top: 1px solid rgba(0, 0, 0, 0.03);
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cd-cta-call {
+      background-color: #0066cc;
+    }
+
+    .cd-cta-email {
+      background-color: #2e8b57;
+    }
+
+    .cd-footer-cta:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /* Approx 2px elevation */
     }
 
     /* Scrollbar */
