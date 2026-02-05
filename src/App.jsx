@@ -1822,7 +1822,7 @@ const App = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
                         >
-                            &copy; 2025 Creative Drywall. Family Owned & Operated Since 1976. All rights reserved.
+                            &copy; 2026 Creative Drywall. Family Owned & Operated Since 1976. All rights reserved.
                         </motion.p>
                         <motion.p
                             className="mt-4 text-gray-600 text-lg font-medium"
