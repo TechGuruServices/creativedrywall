@@ -1183,7 +1183,7 @@ const App = () => {
                                         transition={{ delay: 0.4 }}
                                     >
                                         Thank you for your inquiry! George and the Thompson family will contact you within 24 hours
-                                        to confirm your consultation details.
+                                        to confirm details.
                                     </motion.p>
                                     <motion.div
                                         className="bg-gray-800/40 rounded-2xl p-6 text-lg"
@@ -1218,7 +1218,7 @@ const App = () => {
                                                 transition={{ delay: 1.0 }}
                                             >
                                                 <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
-                                                <span>Scheduled on-site consultation with family expert</span>
+                                                <span>Scheduled on-site consult with family expert</span>
                                             </motion.li>
                                         </ul>
                                     </motion.div>
@@ -1716,7 +1716,8 @@ const App = () => {
                                 </div>
                                 <div className="flex items-center space-x-4 text-lg">
                                     <Mail className="w-6 h-6 text-cyan-400" />
-                                    <span className="font-medium break-all">info@creativedrywall.buzz</span>
+                                    <span className="font-medium break-all">golfnbuzz57@icloud.com
+                                </span>
                                 </div>
                                 <a
                                     href="https://www.google.com/maps/search/?api=1&query=6785+Prairie+Schooner+Lane+Missoula+MT+59808"
