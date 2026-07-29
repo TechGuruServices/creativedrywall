@@ -1,0 +1,336 @@
+/* ============================================================
+   VIEWPORT & CROSS-DEVICE COMPATIBILITY LAYER
+   Creative Drywall — enforces strict, predictable rendering
+   across iOS Safari, Android Chrome/WebView, and desktop browsers.
+
+   Load this file AFTER index.css (Tailwind) so these rules can
+   safely override utility classes where device-specific fixes
+   are required. Nothing here changes visual design — it only
+   guarantees the existing design renders correctly everywhere.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. Global box model + hard overflow lock
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    /* Stop iOS/Android from auto-inflating text on rotate */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Prevent any element from ever creating horizontal scroll */
+    max-width: 100%;
+    overflow-x: hidden;
+    /* Smoother font rendering across engines */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Avoid the iOS "rubber band" revealing background outside the page */
+    overscroll-behavior-y: none;
+}
+
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    /* Kill the default 300ms tap delay + double-tap-zoom on touch devices */
+    touch-action: manipulation;
+    /* Remove the gray tap flash on Android/iOS while keeping our own focus styles */
+    -webkit-tap-highlight-color: transparent;
+    /* Reserve room at the very bottom of the page so the persistent
+       floating "Call George / Email Us" bar never covers footer content */
+    padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 640px) {
+    body {
+        padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* Belt-and-suspenders: any accidental full-bleed element (images, iframes,
+   absolutely positioned decorative blobs, etc.) can never exceed viewport width */
+img,
+svg,
+video,
+canvas,
+iframe,
+picture {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ------------------------------------------------------------
+   2. Dynamic viewport height (fixes the classic iOS Safari /
+   Android Chrome "100vh is taller than the visible screen"
+   bug caused by collapsing address bars)
+   ------------------------------------------------------------ */
+:root {
+    /* JS fallback (set in index.html) for browsers without dvh support */
+    --app-vh: 1vh;
+}
+
+.min-h-screen {
+    /* Fallback stack: old browsers -> JS-calculated vh -> modern dvh */
+    min-height: 100vh;
+    min-height: calc(var(--app-vh, 1vh) * 100);
+    min-height: 100dvh;
+}
+
+section#home.min-h-screen {
+    min-height: 100vh;
+    min-height: calc(var(--app-vh, 1vh) * 100);
+    min-height: 100dvh;
+}
+
+@supports (height: 100svh) {
+    .min-h-screen {
+        min-height: 100svh;
+    }
+}
+
+/* ------------------------------------------------------------
+   3. Safe-area support for iPhone notch / Dynamic Island /
+   Android gesture bar on fixed UI elements
+   ------------------------------------------------------------ */
+nav.fixed.top-0 {
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+}
+
+.fixed.bottom-5 {
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    left: calc(1.25rem + env(safe-area-inset-left, 0px));
+}
+
+/* Floating "Call George / Email Us" glass CTA bar */
+.floating-contact-bar {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 640px) {
+    .floating-contact-bar {
+        padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* Keep the back-to-top button riding above the floating contact bar
+   (bar is ~76-84px tall including its own padding) on every device */
+.back-to-top-btn {
+    bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+footer {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* Mobile slide-out menu should respect notch/gesture areas too */
+#mobile-menu,
+[data-mobile-menu] {
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ------------------------------------------------------------
+   4. Prevent iOS Safari auto-zoom on form focus
+   iOS zooms the page in whenever a focused input has a
+   computed font-size under 16px — this forces every form
+   control to be at least 16px regardless of Tailwind classes.
+   ------------------------------------------------------------ */
+input,
+select,
+textarea,
+button {
+    font-size: max(16px, 1rem);
+}
+
+@media (max-width: 767px) {
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="search"],
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* Normalize iOS's default rounded/inset appearance on inputs & buttons */
+input,
+textarea,
+select,
+button {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: inherit;
+}
+
+/* ------------------------------------------------------------
+   5. Touch target sizing (Apple HIG 44x44pt / Material 48dp)
+   Applied to all interactive elements site-wide so nothing is
+   too small to reliably tap on a phone.
+   ------------------------------------------------------------ */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+.cd-cta-email,
+.cd-footer-cta {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+}
+
+/* Exempt inline text links (nav links inside paragraphs, footer legal
+   links, etc.) from the box-sizing min-height so copy doesn't get
+   awkward padding — only enforce on elements that behave like buttons */
+p a,
+li a:not(.cd-footer-cta),
+.font-medium.break-all {
+    min-height: unset;
+    min-width: unset;
+}
+
+/* ------------------------------------------------------------
+   6. Consistent focus states across mouse, touch & keyboard
+   ------------------------------------------------------------ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+    outline: 2px solid var(--accent-cyan, #22d3ee);
+    outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------
+   7. Fine-grained responsive breakpoints
+   Tightens layout on very small phones and large-format
+   devices that fall between Tailwind's default breakpoints.
+   ------------------------------------------------------------ */
+
+/* Extra-small phones: iPhone SE / older Android (320–374px) */
+@media (max-width: 374px) {
+
+    h1,
+    .text-6xl,
+    .text-7xl {
+        font-size: clamp(1.75rem, 9vw, 2.5rem) !important;
+        line-height: 1.15 !important;
+    }
+
+    .px-4 {
+        padding-left: 0.875rem !important;
+        padding-right: 0.875rem !important;
+    }
+}
+
+/* Small phones / phablets (375–639px) */
+@media (min-width: 375px) and (max-width: 639px) {
+    h1 {
+        line-height: 1.15;
+    }
+}
+
+/* Short-viewport landscape phones (address bar eats vertical space) */
+@media (max-height: 500px) and (orientation: landscape) {
+    section#home.min-h-screen {
+        min-height: auto;
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
+}
+
+/* Tablets in portrait (iPad Mini/Air breakpoint gap) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container,
+    main {
+        max-width: 100%;
+    }
+}
+
+/* Foldables / narrow tablets */
+@media (min-width: 640px) and (max-width: 767px) {
+    .grid.md\:grid-cols-2 {
+        gap: 1.5rem;
+    }
+}
+
+/* High-density desktop / large monitors: cap content width so it
+   doesn't stretch awkwardly wide */
+@media (min-width: 1920px) {
+    body {
+        max-width: 100vw;
+    }
+}
+
+/* ------------------------------------------------------------
+   8. Prevent layout shift / overflow from flex & grid children
+   ------------------------------------------------------------ */
+.flex {
+    min-width: 0;
+}
+
+.flex>* {
+    min-width: 0;
+}
+
+.break-all,
+.break-words {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------
+   9. Hover-only affordances shouldn't stick on touch devices
+   ------------------------------------------------------------ */
+@media (hover: none) and (pointer: coarse) {
+
+    .group:hover .group-hover\:scale-110,
+    .group:hover .group-hover\:text-cyan-400 {
+        transform: none;
+    }
+
+    /* Disable hover-triggered animations that can visually "stick"
+       after a tap on touch devices */
+    *:hover {
+        transition-duration: 0s;
+    }
+}
+
+/* ------------------------------------------------------------
+   10. Respect reduced motion & data-saver preferences
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ------------------------------------------------------------
+   11. Print safety (in case pages are printed/saved as PDF)
+   ------------------------------------------------------------ */
+@media print {
+
+    nav.fixed,
+    .fixed.bottom-5 {
+        display: none !important;
+    }
+}

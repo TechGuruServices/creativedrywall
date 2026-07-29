@@ -2,6 +2,7 @@ import { useState, useEffect, Suspense, lazy } from 'react';
 import { Phone, MapPin, ShieldCheck, Hammer, Users, Star, Calendar, CheckCircle, Clock, Mail, Menu, X, Home, Briefcase, User, Image, MessageCircle, Sun, Moon, Calculator, ArrowDown, Award, Sparkles, ChevronRight, Play, Zap } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import QuoteCalculator from './components/QuoteCalculator';
+import FloatingContactBar from './components/FloatingContactBar';
 
 
 
@@ -309,6 +310,7 @@ const App = () => {
                     <AnimatePresence>
                         {isMenuOpen && (
                             <motion.div
+                                data-mobile-menu
                                 className="md:hidden bg-gray-900/95 backdrop-blur-xl border-t border-gray-700/50"
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: 'auto', opacity: 1 }}
@@ -1598,7 +1600,7 @@ const App = () => {
                                         </div>
                                         <div>
                                             <h4 className="text-xl font-bold mb-2 text-white">Email</h4>
-                                            <p className="text-2xl font-bold text-cyan-400 break-all">info@creativedrywall.buzz</p>
+                                            <p className="text-2xl font-bold text-cyan-400 break-all">golfnbuzz57@icloud.com</p>
                                             <p className="text-gray-400">Response within 24 hours</p>
                                         </div>
                                     </div>
@@ -1848,6 +1850,9 @@ const App = () => {
                 </div>
             </footer >
 
+            {/* Floating Glassmorphism Contact Bar: Call George / Email Us */}
+            <FloatingContactBar />
+
             {/* Floating Back to Top Button */}
             < AnimatePresence >
                 {scrollY > 500 && (
@@ -1855,7 +1860,7 @@ const App = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
-                        className="fixed bottom-5 left-5 z-50 w-11 h-11 rounded-2xl bg-gradient-to-br from-slate-800/95 to-slate-900/98 backdrop-blur-xl border border-white/10 text-cyan-400 flex items-center justify-center transition-all duration-300 hover:border-cyan-500/30"
+                        className="back-to-top-btn fixed left-5 z-50 w-11 h-11 rounded-2xl bg-gradient-to-br from-slate-800/95 to-slate-900/98 backdrop-blur-xl border border-white/10 text-cyan-400 flex items-center justify-center transition-all duration-300 hover:border-cyan-500/30"
                         style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08)' }}
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         whileHover={{ scale: 1.1, y: -3 }}
