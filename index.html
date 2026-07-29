@@ -45,8 +45,7 @@
     rel="stylesheet">
 
   <!-- Preload Critical Hero Image for LCP -->
-  <link rel="preload" as="image"
-    href="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1920&q=80" />
+  <link rel="preload" as="image" href="/hero-new.jpg" fetchpriority="high" />
 
   <!-- Primary Meta Tags -->
   <title>Quality Drywall, Done Right. Serving Missoula, MT | Since 1976</title>
@@ -516,9 +515,11 @@
 
     .cd-chat-widget {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 99999;
+      /* Sit above the persistent "Call George / Email Us" bar (~76-92px tall)
+         instead of overlapping its right-hand button */
+      bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+      right: calc(16px + env(safe-area-inset-right, 0px));
+      z-index: 9998;
       font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
       pointer-events: none;
     }
@@ -987,15 +988,15 @@
     /* Mobile Responsive */
     @media (max-width: 480px) {
       .cd-chat-widget {
-        bottom: 16px;
-        right: 16px;
+        bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+        right: calc(12px + env(safe-area-inset-right, 0px));
       }
 
       .cd-chat-window {
         width: calc(100vw - 32px);
         /* Full width minus margin */
-        height: min(600px, calc(100vh - 100px));
-        /* Intelligent height */
+        height: min(600px, calc(100vh - 160px));
+        /* Intelligent height, leaves room for the bar below */
         bottom: 80px;
         right: 0;
         transform-origin: bottom right;

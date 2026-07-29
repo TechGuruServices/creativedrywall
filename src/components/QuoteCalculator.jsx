@@ -76,10 +76,10 @@ const QuoteCalculator = () => {
                         Instant Estimate
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                        Get Your <span className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">Free Quote</span>
+                        Get a <span className="bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">Ballpark Number</span>
                     </h2>
                     <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                        Enter your room dimensions for an instant ballpark estimate. Final pricing provided after consultation.
+                        Punch in your room size and we'll give you a rough idea of cost. We'll nail down the real number once we've had a look in person.
                     </p>
                 </motion.div>
 

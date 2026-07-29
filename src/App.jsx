@@ -77,21 +77,21 @@ const App = () => {
         {
             icon: <Hammer className="w-8 h-8" />,
             title: "Complete Drywall Installation",
-            description: "Full-service drywall installation from framing to final finish for residential and commercial properties.",
+            description: "From hanging the first sheet to the final coat of paint prep, we handle the whole job for homes and businesses around Missoula.",
             featured: true,
             accent: "cyan"
         },
         {
             icon: <ShieldCheck className="w-8 h-8" />,
             title: "Repair & Restoration",
-            description: "Expert repair of damaged drywall, water damage, and structural issues with lasting solutions.",
+            description: "Cracks, holes, water damage, whatever the Montana winters throw at your walls — we'll patch it up so you'd never know.",
             featured: false,
             accent: "blue"
         },
         {
             icon: <Users className="w-8 h-8" />,
             title: "All Phase Service",
-            description: "Comprehensive drywall services including hanging, taping, texturing, and finishing for any project size.",
+            description: "Hanging, taping, texturing, finishing — big project or small patch job, we're happy to help however you need us.",
             featured: false,
             accent: "gold"
         }
@@ -386,7 +386,8 @@ const App = () => {
                         src={heroBackgroundImage}
                         alt="Modern Home Exterior"
                         className="absolute inset-0 w-full h-full object-cover"
-                        loading="lazy"
+                        loading="eager"
+                        fetchpriority="high"
                     />
                     {/* Premium Overlay */}
                     <div className="absolute inset-0 hero-overlay"></div>
@@ -467,7 +468,7 @@ const App = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.4 }}
                             >
-                                Montana's Premier
+                                Your Hometown
                             </motion.span>
                             <motion.span
                                 className="block pb-2 gradient-text-animated"
@@ -475,7 +476,7 @@ const App = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.5 }}
                             >
-                                Drywall Experts
+                                Drywall Crew
                             </motion.span>
                         </motion.h1>
 
@@ -507,8 +508,9 @@ const App = () => {
                                 ))}
                             </div>
                             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                                Four generations of family craftsmanship serving Missoula and the surrounding valleys with
-                                precision drywall installation, repair, and finishing services.
+                                Four generations of the Thompson family, hanging and finishing drywall right here in
+                                Missoula and the surrounding valleys. No call centers, no sales pitch — just neighbors
+                                who show up and do good work.
                             </p>
                         </motion.div>
 
@@ -646,17 +648,17 @@ const App = () => {
                             whileHover={{ scale: 1.05 }}
                         >
                             <Sparkles className="w-4 h-4" />
-                            <span>Our Premium Services</span>
+                            <span>What We Do</span>
                         </motion.div>
                         <h2 className="text-4xl md:text-6xl font-bold mb-8">
-                            <span className="block mb-2">Complete Drywall</span>
+                            <span className="block mb-2">Drywall Work</span>
                             <span className="block gradient-text-animated">
-                                Solutions for Every Project
+                                Done Right, Start to Finish
                             </span>
                         </h2>
                         <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                            From initial consultation to final inspection, we provide comprehensive drywall solutions
-                            with unmatched attention to detail and quality craftsmanship.
+                            From the first walkthrough to the last coat of texture, we treat every home and job site
+                            like it's our own — clean work, fair prices, and no shortcuts.
                         </p>
                     </motion.div>
 
@@ -742,9 +744,9 @@ const App = () => {
                                     <span className={`relative z-10 flex items-center gap-2 ${service.accent === 'cyan' ? 'text-cyan-400 group-hover/btn:text-cyan-300' : service.accent === 'blue' ? 'text-blue-400 group-hover/btn:text-blue-300' : 'text-amber-400 group-hover/btn:text-amber-300'} transition-colors duration-300`}>
                                         <Star className="w-4 h-4" />
                                         <span>
-                                            {service.title === "Complete Drywall Installation" ? "Start Installation" :
-                                                service.title === "Repair & Restoration" ? "Assess Damage" :
-                                                    "Customize Your Project"}
+                                            {service.title === "Complete Drywall Installation" ? "Let's Get Started" :
+                                                service.title === "Repair & Restoration" ? "Take a Look at It" :
+                                                    "Talk Through Your Project"}
                                         </span>
                                         <motion.span
                                             className="inline-block"
@@ -767,7 +769,7 @@ const App = () => {
                         viewport={{ once: true }}
                         transition={{ delay: 0.5 }}
                     >
-                        <p className="text-gray-400 mb-6">Need something specific? We handle custom projects too.</p>
+                        <p className="text-gray-400 mb-6">Got something a little different in mind? Give us a shout — we're easy to talk to.</p>
                         <motion.a
                             href="#contact"
                             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 hover:border-cyan-400/30 text-white hover:text-cyan-400 transition-all"
@@ -775,7 +777,7 @@ const App = () => {
                             whileTap={{ scale: 0.98 }}
                         >
                             <MessageCircle className="w-4 h-4" />
-                            <span className="font-medium">Discuss Your Project</span>
+                            <span className="font-medium">Let's Chat</span>
                         </motion.a>
                     </motion.div>
                 </div>
@@ -798,7 +800,7 @@ const App = () => {
                                 Since 1976
                             </motion.span>
                             <h2 className="text-4xl md:text-6xl font-bold mb-10 leading-tight">
-                                <span className="block mb-4">A Legacy of</span>
+                                <span className="block mb-4">A Missoula Story,</span>
                                 <motion.span
                                     className="block pb-2 bg-gradient-to-r from-blue-300 via-cyan-200 to-blue-400 bg-clip-text text-transparent whitespace-nowrap"
                                     initial={{ backgroundPosition: "0% 50%" }}
@@ -810,15 +812,15 @@ const App = () => {
                                         backgroundSize: '200% 200%',
                                     }}
                                 >
-                                    Excellence &amp; Integrity
+                                    Since 1976
                                 </motion.span>
                             </h2>
 
                             <p className="text-lg text-gray-300 mb-8 leading-relaxed max-w-2xl">
-                                Founded in 1976 by George Thompson, Creative Drywall has been a cornerstone of
-                                Montana's construction community for nearly five decades. What began as a one-man
-                                operation has grown into a family legacy, with George's three sons now leading
-                                operations while preserving the core values that built the business.
+                                George Thompson started this business back in 1976 with a truck, some tools, and a
+                                good reputation to protect. Almost fifty years later, his three sons are running the
+                                show, but it's still the same handshake business it always was — we show up, we do
+                                the work right, and we treat your home like it matters. Because around here, it does.
                             </p>
 
                             <div className="space-y-6 mb-12">
@@ -834,8 +836,8 @@ const App = () => {
                                         <Users className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="text-xl font-bold mb-2 text-white">Generational Knowledge</h4>
-                                        <p className="text-gray-300">Hands-on mentorship passed down through nearly five decades of family tradition.</p>
+                                        <h4 className="text-xl font-bold mb-2 text-white">Knowledge Passed Down</h4>
+                                        <p className="text-gray-300">Dad taught the boys the trade the old-fashioned way — on the job, sheet by sheet, for almost 50 years now.</p>
                                     </div>
                                 </motion.div>
 
@@ -851,8 +853,8 @@ const App = () => {
                                         <ShieldCheck className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="text-xl font-bold mb-2 text-white">Quality Over Quantity</h4>
-                                        <p className="text-gray-300">Every project receives personal attention from the Thompson family.</p>
+                                        <h4 className="text-xl font-bold mb-2 text-white">We Don't Rush the Job</h4>
+                                        <p className="text-gray-300">A Thompson is on every job site, big or small — we'd rather do it right than do it fast.</p>
                                     </div>
                                 </motion.div>
                             </div>
@@ -991,14 +993,14 @@ const App = () => {
                             whileHover={{ scale: 1.05 }}
                         >
                             <Image className="w-4 h-4" />
-                            <span>Our Portfolio</span>
+                            <span>See Our Work</span>
                         </motion.div>
                         <h2 className="text-4xl md:text-6xl font-bold mb-6">
-                            <span className="block mb-2">Craftsmanship</span>
-                            <span className="block gradient-text-animated">In Every Detail</span>
+                            <span className="block mb-2">A Few Jobs</span>
+                            <span className="block gradient-text-animated">We're Proud Of</span>
                         </h2>
                         <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                            Explore a selection of our finest residential and commercial projects across Montana.
+                            A handful of homes and buildings around the valley we've had the chance to work on.
                         </p>
                     </motion.div>
 
@@ -1093,7 +1095,7 @@ const App = () => {
                             whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.98 }}
                         >
-                            <span>Let's Create Your Project</span>
+                            <span>Let's Talk About Yours</span>
                             <ChevronRight className="w-5 h-5" />
                         </motion.a>
                     </motion.div>
@@ -1124,12 +1126,12 @@ const App = () => {
                             <span>Get In Touch</span>
                         </motion.div>
                         <h2 className="text-4xl md:text-6xl font-bold mb-8">
-                            <span className="block mb-2">Contact Creative</span>
-                            <span className="block gradient-text-animated">Drywall Today</span>
+                            <span className="block mb-2">Let's Talk About</span>
+                            <span className="block gradient-text-animated">Your Project</span>
                         </h2>
                         <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                            Reach out to the Thompson family for a free consultation and detailed quote for your
-                            residential or commercial drywall project.
+                            Give the Thompson family a call or drop us a note below — we'll walk through your project
+                            and get you a free, no-pressure quote.
                         </p>
                     </motion.div>
 
@@ -1146,8 +1148,8 @@ const App = () => {
                                 <div className="w-14 h-14 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/20">
                                     <Mail className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-3xl font-bold mb-4">Request a Quote</h3>
-                                <p className="text-gray-400 text-lg">Fill out the form below and we'll contact you within 24 hours</p>
+                                <h3 className="text-3xl font-bold mb-4">Get a Free Quote</h3>
+                                <p className="text-gray-400 text-lg">Tell us a little about your project below, and we'll get back to you within 24 hours.</p>
                             </div>
 
                             {submitSuccess ? (
@@ -1176,7 +1178,7 @@ const App = () => {
                                         animate={{ y: 0, opacity: 1 }}
                                         transition={{ delay: 0.2 }}
                                     >
-                                        Consultation Requested!
+                                        Got It, Thanks!
                                     </motion.h4>
                                     <motion.p
                                         className="text-gray-300 text-xl mb-8 max-w-2xl mx-auto"
@@ -1184,8 +1186,8 @@ const App = () => {
                                         animate={{ y: 0, opacity: 1 }}
                                         transition={{ delay: 0.4 }}
                                     >
-                                        Thank you for your inquiry! George and the Thompson family will contact you within 24 hours
-                                        to confirm details.
+                                        We appreciate you reaching out. George and the family will give you a call
+                                        within 24 hours to talk through the details.
                                     </motion.p>
                                     <motion.div
                                         className="bg-gray-800/40 rounded-2xl p-6 text-lg"
@@ -1202,7 +1204,7 @@ const App = () => {
                                                 transition={{ delay: 0.8 }}
                                             >
                                                 <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
-                                                <span>Phone call to confirm consultation details</span>
+                                                <span>We'll give you a call to go over the details</span>
                                             </motion.li>
                                             <motion.li
                                                 className="flex items-start space-x-3"
@@ -1211,7 +1213,7 @@ const App = () => {
                                                 transition={{ delay: 0.9 }}
                                             >
                                                 <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
-                                                <span>Email with project preparation checklist</span>
+                                                <span>You'll get an email with a quick checklist to get ready</span>
                                             </motion.li>
                                             <motion.li
                                                 className="flex items-start space-x-3"
@@ -1220,7 +1222,7 @@ const App = () => {
                                                 transition={{ delay: 1.0 }}
                                             >
                                                 <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
-                                                <span>Scheduled on-site consult with family expert</span>
+                                                <span>We'll set up a time to stop by and take a look in person</span>
                                             </motion.li>
                                         </ul>
                                     </motion.div>
@@ -1510,7 +1512,7 @@ const App = () => {
                                             onChange={handleChange}
                                             rows={5}
                                             className="w-full bg-gray-800/40 border border-gray-700/50 rounded-2xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all text-lg resize-none"
-                                            placeholder="Tell us about your project, special requirements, or any other details..."
+                                            placeholder="Tell us a bit about your project — what needs done, any quirks about the space, whatever's helpful..."
                                         />
                                     </motion.div>
 
@@ -1534,17 +1536,17 @@ const App = () => {
                                                         animate={{ rotate: 360 }}
                                                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                                                     />
-                                                    <span>Processing Your Request...</span>
+                                                    <span>Sending It Over...</span>
                                                 </div>
                                             ) : (
                                                 <span className="flex items-center justify-center space-x-3">
                                                     <Mail className="w-6 h-6" />
-                                                    <span>Request Consultation & Quote</span>
+                                                    <span>Send My Request</span>
                                                 </span>
                                             )}
                                         </motion.button>
                                         <p className="text-gray-500 text-center mt-4">
-                                            By submitting, you agree to our privacy policy. We'll contact you within 24 hours.
+                                            We'll never share your info — just used to get back to you within 24 hours.
                                         </p>
                                     </motion.div>
                                 </form>
@@ -1563,9 +1565,9 @@ const App = () => {
                                 <div className="w-14 h-14 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center text-cyan-400 mb-6 border border-cyan-500/20">
                                     <MapPin className="w-7 h-7" />
                                 </div>
-                                <h3 className="text-3xl font-bold mb-4">Contact Information</h3>
+                                <h3 className="text-3xl font-bold mb-4">How to Reach Us</h3>
                                 <p className="text-gray-400 text-lg mb-6">
-                                    Reach out to the Thompson family directly or visit our office at <a href="https://www.google.com/maps/search/?api=1&query=6785+Prairie+Schooner+Lane+Missoula+MT+59808" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors underline decoration-cyan-400/30 underline-offset-4">6785 Prairie Schooner Lane, Missoula, MT 59808</a>.
+                                    Call, email, or swing by our shop at <a href="https://www.google.com/maps/search/?api=1&query=6785+Prairie+Schooner+Lane+Missoula+MT+59808" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors underline decoration-cyan-400/30 underline-offset-4">6785 Prairie Schooner Lane, Missoula, MT 59808</a> — whatever's easiest for you.
                                 </p>
                             </div>
 
@@ -1583,7 +1585,7 @@ const App = () => {
                                         <div>
                                             <h4 className="text-xl font-bold mb-2 text-white">Phone</h4>
                                             <p className="text-2xl font-bold text-cyan-400">(406) 239-0850</p>
-                                            <p className="text-gray-400">Monday - Friday: 8:00 AM - 5:00 PM</p>
+                                            <p className="text-gray-400">Give us a ring, Monday - Friday, 8 AM - 5 PM</p>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -1601,7 +1603,7 @@ const App = () => {
                                         <div>
                                             <h4 className="text-xl font-bold mb-2 text-white">Email</h4>
                                             <p className="text-2xl font-bold text-cyan-400 break-all">golfnbuzz57@icloud.com</p>
-                                            <p className="text-gray-400">Response within 24 hours</p>
+                                            <p className="text-gray-400">We'll write you back within 24 hours</p>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -1640,7 +1642,7 @@ const App = () => {
                                         <div className="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center">
                                             <Users className="w-6 h-6 text-cyan-400" />
                                         </div>
-                                        <h4 className="text-2xl font-bold text-white">Why Choose Us?</h4>
+                                        <h4 className="text-2xl font-bold text-white">Why Folks Call Us</h4>
                                     </div>
                                     <div className="space-y-5 text-lg text-gray-300">
                                         <motion.div
@@ -1653,7 +1655,7 @@ const App = () => {
                                             <div className="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
                                                 <ShieldCheck className="w-4 h-4 text-cyan-400" />
                                             </div>
-                                            <span>Family-owned business with 49+ years of experience</span>
+                                            <span>A local family business, doing this work for 49+ years</span>
                                         </motion.div>
                                         <motion.div
                                             className="flex items-start space-x-4"
@@ -1665,7 +1667,7 @@ const App = () => {
                                             <div className="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
                                                 <Star className="w-4 h-4 text-cyan-400" />
                                             </div>
-                                            <span>100% satisfaction guarantee on all projects</span>
+                                            <span>We're not happy until you're happy with the job</span>
                                         </motion.div>
                                         <motion.div
                                             className="flex items-start space-x-4"
@@ -1677,7 +1679,7 @@ const App = () => {
                                             <div className="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
                                                 <Hammer className="w-4 h-4 text-cyan-400" />
                                             </div>
-                                            <span>All phase drywall service for residential & commercial</span>
+                                            <span>From a single patch to a whole new build, we handle it all</span>
                                         </motion.div>
                                     </div>
                                 </motion.div>
@@ -1708,8 +1710,8 @@ const App = () => {
                                 </motion.div>
                             </div>
                             <p className="text-gray-400 mb-8 text-lg max-w-2xl">
-                                Montana's premier family-owned drywall company, serving the Treasure State
-                                with pride, integrity, and unmatched craftsmanship since 1976.
+                                A family-owned drywall crew serving Missoula and the surrounding valleys since 1976.
+                                Same family, same handshake, still doing right by our neighbors.
                             </p>
                             <div className="space-y-4">
                                 <div className="flex items-center space-x-4 text-lg">
