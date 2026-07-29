@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { Phone, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -14,18 +15,54 @@ import { motion } from 'framer-motion';
  * - Safe-area aware (iPhone home indicator / Android gesture bar) via
  *   .floating-contact-bar rules in viewport-compatibility.css.
  * - Meets 44px minimum touch target on both buttons.
+ * - Hides on scroll-down, reappears on scroll-up (same behavior as the
+ *   top nav), so it doesn't permanently cover content while reading.
+ *   Always stays visible near the very top and very bottom of the page.
  */
 const PHONE_TEL = 'tel:+14062390850';
 const PHONE_DISPLAY = '(406) 239-0850';
 const EMAIL_ADDRESS = 'golfnbuzz57@icloud.com';
 
 const FloatingContactBar = () => {
+    const [isHidden, setIsHidden] = useState(false);
+    const lastScrollY = useRef(0);
+
+    useEffect(() => {
+        lastScrollY.current = window.scrollY;
+
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            const scrollDelta = currentScrollY - lastScrollY.current;
+            const docHeight = document.documentElement.scrollHeight;
+            const viewportHeight = window.innerHeight;
+            const distanceFromBottom = docHeight - (currentScrollY + viewportHeight);
+
+            // Always show near the top of the page, or once the user is
+            // close to the bottom (footer / contact form area).
+            if (currentScrollY < 120 || distanceFromBottom < 400) {
+                setIsHidden(false);
+            } else if (scrollDelta > 6) {
+                // Scrolling down with enough intent -> hide
+                setIsHidden(true);
+            } else if (scrollDelta < -6) {
+                // Scrolling up -> reveal
+                setIsHidden(false);
+            }
+
+            lastScrollY.current = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <motion.div
             className="floating-contact-bar fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-3 sm:px-4 sm:pb-4 pointer-events-none"
             initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
+            animate={isHidden ? { y: 100, opacity: 0 } : { y: 0, opacity: 1 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            style={{ pointerEvents: isHidden ? 'none' : 'auto' }}
         >
             <div
                 className="pointer-events-auto w-full max-w-md sm:max-w-lg rounded-2xl border border-white/15 bg-white/10 backdrop-blur-2xl backdrop-saturate-150 shadow-2xl"
