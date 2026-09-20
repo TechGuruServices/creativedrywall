@@ -3,6 +3,7 @@ import { Phone, MapPin, ShieldCheck, Hammer, Users, Star, Calendar, CheckCircle,
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import QuoteCalculator from './components/QuoteCalculator';
 import FloatingContactBar from './components/FloatingContactBar';
+import HeroBackgroundCarousel from './components/HeroBackgroundCarousel';
 
 
 
@@ -32,8 +33,15 @@ const App = () => {
     const [activeSection, setActiveSection] = useState('home');
     const [isDarkMode, setIsDarkMode] = useState(true);
 
-    // Hero background image
-    const heroBackgroundImage = "/hero-new.jpg";
+    // Hero background — rotates through these photos (see HeroBackgroundCarousel).
+    // 1st slide is the current house photo; the rest are real project shots plus
+    // one placeholder for a Missoula valley/landscape shot (see repo README note).
+    const heroImages = [
+        { src: "/hero-new.jpg", alt: "Creative Drywall's finished home exterior in Missoula, MT" },
+        { src: "/live-jobsite2303.png", alt: "Freshly finished drywall ceiling and walls on a Missoula job site" },
+        { src: "/portfolio-2.png", alt: "Finished commercial office space by Creative Drywall" },
+        { src: "/missoula-valley-placeholder.jpg", alt: "Missoula valley and mountains at dusk" },
+    ];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -381,14 +389,8 @@ const App = () => {
             <section id="home" className="pt-40 md:pt-48 lg:pt-56 pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex items-center">
                 {/* Hero Background with Image */}
                 <div className="absolute inset-0">
-                    {/* Background Image */}
-                    <img
-                        src={heroBackgroundImage}
-                        alt="Modern Home Exterior"
-                        className="absolute inset-0 w-full h-full object-cover"
-                        loading="eager"
-                        fetchpriority="high"
-                    />
+                    {/* Rotating Background Images */}
+                    <HeroBackgroundCarousel images={heroImages} />
                     {/* Premium Overlay */}
                     <div className="absolute inset-0 hero-overlay"></div>
 
